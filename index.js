@@ -1,9 +1,16 @@
-var electron = require('electron');
-var BrowserWindow = electron.BrowserWindow;
-var app = electron.app;
+const ipc = require('electron').ipcRenderer;
 
-app.on('ready', function() {
-  var mainWindow;
-  mainWindow = new BrowserWindow();
-  mainWindow.loadURL('www.google.ee');
+ipc.on('open-address-input', () => {
+	console.log('luls');
 });
+
+window.onload = function() {
+	document.getElementById('address_submit').addEventListener('click', function() {
+		var address = document.getElementById('address').value;
+		if (address !== '') {
+			window.location.href = address;
+		} else {
+			alert('Aadressiväli on tühi!');
+		}
+	});
+};

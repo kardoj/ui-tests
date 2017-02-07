@@ -25,7 +25,7 @@ Kasutaja tehtud hiirevajutused salvestatakse ja neid on võimalik pärast samas 
 ## Lingid
 [Blogi](http://kardo.xyz/b/veebilehestiku-testimine/)
 
-## Käivitamine
+## Käivitamine (Windows)
 Eelduseks on [Node.js](https://nodejs.org/en/) olemasolu.
 Kui repo on kloonitud, siis seal kaustas käivitada `npm install` ja rakenduse käivitamiseks samas kohas `electron .`.
 _Build_'ide lingid tulevad siia hiljem.
