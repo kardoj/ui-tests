@@ -1,10 +1,10 @@
-# Veebilehestiku kasutajaliidese testide salvestamine ja mahamängimine
+﻿# Veebilehestiku kasutajaliidese testide salvestamine ja mahamängimine
 ## Kirjeldus/eesmärk
 Luua töölauarakendus kasutades Electron'i. Avades rakenduse saab kasutaja sisestada veebiaadressi. Sisestatud
 aadressil olev leht avatakse rakenduses. Seejärel on võimalik alustada uue stsenaariumi salvestamist.
 Kasutaja tehtud hiirevajutused salvestatakse ja neid on võimalik pärast samas järjekorras automaatselt taasesitada.
 
-## Limitatsioonid
+## Piirangud
 * Aken on alati sama suur
 * Testid mängitakse maha reaalajas
 
