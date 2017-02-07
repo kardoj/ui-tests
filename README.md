@@ -1,11 +1,9 @@
 ﻿# Rakendus veebilehestiku kasutajaliidese testimiseks
+
 ## Kirjeldus/eesmärk
 Luua töölauarakendus kasutades HTML'i, CSS'i, JavaScript'i ja Electron'i. Avades rakenduse saab kasutaja sisestada veebiaadressi. Sisestatud
 aadressil asuv leht avatakse rakenduses. Seejärel on võimalik alustada uue stsenaariumi salvestamist.
 Kasutaja tehtud hiirevajutused salvestatakse ja neid on võimalik pärast samas järjekorras automaatselt taasesitada.
-
-## Lingid
-[Blogi](http://kardo.xyz/b/veebilehestiku-testimine/)
 
 ## Piirangud
 * Aken on alati samade mõõtmetega, millega test oli salvestatud
@@ -23,6 +21,14 @@ Kasutaja tehtud hiirevajutused salvestatakse ja neid on võimalik pärast samas 
 6. Igal hetkel on võimalik salvestus panna pausile ja lisada sellesse kohta mõne elemendi olemasolu kontroll
 7. Peaks kuidagi saama tagasisidet/valideerima seda rakendust nt ekspertide abil, kes proovivad mingi asja lahendada (thinkaloud testing).
 8. Kui aega jääb üle (ei jää), uurida, kuidas taasesitust optimeerida (kiirust suurendada, äkki kuidagi loobuda reaalajast)
+
+## Lingid
+[Blogi](http://kardo.xyz/b/veebilehestiku-testimine/)
+
+## Käivitamine
+Eelduseks on [Node.js](https://nodejs.org/en/) olemasolu.
+Kui repo on kloonitud, siis seal kaustas käivitada `npm install` ja rakenduse käivitamiseks samas kohas `electron .`.
+_Build_'ide lingid tulevad siia hiljem.
 
 ## Töögraafik
 Iga eduka päeva lõppu kuulub blogipost saavutustega (et saaks hiljem vaadata ja tööd täiendada), lisaks

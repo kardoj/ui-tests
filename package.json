@@ -1,0 +1,9 @@
+{
+  "name": "UiTesting",
+  "version": "1.0.0",
+  "repository": "https://github.com/kardoj/ui-tests",
+  "license": "(MIT OR Apache-2.0)",
+  "devDependencies": {
+    "electron": "^1.4.15"
+  }
+}
