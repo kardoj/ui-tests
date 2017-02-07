@@ -12,8 +12,8 @@ Kasutaja tehtud hiirevajutused salvestatakse ja neid on võimalik pärast samas 
 0. Uurida kliki salvestamist, mahamängimist koordinaatidepõhiselt (JavaScript elementFromPoint(x, y).click();)
 1. Electron rakendus, kuhu saab veebilehe sisse laadida
 2. Leida mõned konkurendid ja nende pakutavat funktsionaalsust uurida ja võrrelda
-  2.1. Uurida automaattestimise skoopi (mida kuidas saab ja on mõistlik UI poolel testida)
-  2.2. Teha valik, mida ja kuidas rakendusega katta sealt skoobist
+  1. Uurida automaattestimise skoopi (mida kuidas saab ja on mõistlik UI poolel testida)
+  2. Teha valik, mida ja kuidas rakendusega katta sealt skoobist
 3. Alusta salvestust võimalus, pärast mida hakkab taimer käima ja vajutusi järjekorras salvestama
 4. Salvestuste failide eksport ja import (paika panna salvestuste formaat [JSON?])
 5. Salvestuste valik ja mahamängimine
