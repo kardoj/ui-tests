@@ -1,12 +1,15 @@
-﻿# Veebilehestiku kasutajaliidese testide salvestamine ja mahamängimine
+﻿# Rakendus veebilehestiku kasutajaliidese testimiseks
 ## Kirjeldus/eesmärk
-Luua töölauarakendus kasutades Electron'i. Avades rakenduse saab kasutaja sisestada veebiaadressi. Sisestatud
-aadressil olev leht avatakse rakenduses. Seejärel on võimalik alustada uue stsenaariumi salvestamist.
+Luua töölauarakendus kasutades HTML'i, CSS'i, JavaScript'i ja Electron'i. Avades rakenduse saab kasutaja sisestada veebiaadressi. Sisestatud
+aadressil asuv leht avatakse rakenduses. Seejärel on võimalik alustada uue stsenaariumi salvestamist.
 Kasutaja tehtud hiirevajutused salvestatakse ja neid on võimalik pärast samas järjekorras automaatselt taasesitada.
 
+## Lingid
+[Blogi](http://kardo.xyz/b/veebilehestiku-testimine/)
+
 ## Piirangud
-* Aken on alati sama suur
-* Testid mängitakse maha reaalajas
+* Aken on alati samade mõõtmetega, millega test oli salvestatud
+* Testid esitatakse reaalajas
 
 ## Ülesanded
 0. Uurida kliki salvestamist, mahamängimist koordinaatidepõhiselt (JavaScript elementFromPoint(x, y).click();)

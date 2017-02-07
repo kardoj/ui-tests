@@ -7,7 +7,7 @@ function Playback(recording) {
 	this.play = function() {
 		var recordedActions = this.recording.getActions();
 		for (var i = 0; i < recordedActions.length; i++) {
-		queueActionPlayback.call(this, recordedActions[i]);
+			queueActionPlayback.call(this, recordedActions[i]);
 		}
 	};
 
