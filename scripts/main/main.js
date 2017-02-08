@@ -2,42 +2,33 @@ const { app, BrowserWindow } = require('electron');
 const path = require('path');
 const url = require('url');
 
-require(path.join(__dirname, 'components/menu'));
+require(path.join(__dirname, 'menu'));
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let win;
+let mainWindow, addressPrompt;
 
 function createWindow () {
 	// Create the browser window.
-	win = new BrowserWindow({ width: 1000, height: 800 });
+	mainWindow = new BrowserWindow({ width: 1000, height: 800 });
 
 	// and load the index.html of the app.
-	win.loadURL(url.format({
-		pathname: path.join(__dirname, 'index.html'),
+	mainWindow.loadURL(url.format({
+		pathname: path.join(__dirname, '../../views/index.html'),
 		protocol: 'file:',
 		slashes: true
 	}));
 
-	win.webContents.openDevTools();
-
-	win.webContents.on('did-finish-load', function() {
-		win.webContents.executeJavaScript('document.addEventListener("click", (e) => { require("electron").remote.app.logElement(document, e.clientX, e.clientY); })');
-	});
+	mainWindow.webContents.openDevTools();
 
 	// Emitted when the window is closed.
-	win.on('closed', () => {
+	mainWindow.on('closed', () => {
 		// Dereference the window object, usually you would store windows
 		// in an array if your app supports multi windows, this is the time
 		// when you should delete the corresponding element.
-		win = null;
+		mainWindow = null;
 	});
 }
-
-// Need to use the webview tag
-app.logElement = function(doc, x, y) {
-	console.log(doc.elementFromPoint(x, y));
-};
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -56,7 +47,20 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
 	// On macOS it's common to re-create a window in the app when the
 	// dock icon is clicked and there are no other windows open.
-	if (win === null) {
+	if (mainWindow === null) {
 		createWindow();
 	}
 });
+
+// Getters and setters to access windows from other files
+app.getMainWindow = () => {
+	return mainWindow;
+};
+
+app.getAddressPrompt = () => {
+	return addressPrompt;
+};
+
+app.setAddressPrompt = (aP) => {
+	addressPrompt = aP;
+};
