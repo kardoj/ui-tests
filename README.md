@@ -1,4 +1,4 @@
-﻿# Rakendus veebilehestiku kasutajaliidese testimiseks
+﻿# Veebilehe kasutajaliidese testimise rakenduse loomine
 
 ## Kirjeldus/eesmärk
 Luua töölauarakendus kasutades HTML'i, CSS'i, JavaScript'i ja Electron'i. Avades rakenduse saab kasutaja sisestada veebiaadressi. Sisestatud
