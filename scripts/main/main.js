@@ -6,11 +6,16 @@ require(path.join(__dirname, 'menu'));
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let mainWindow, addressPrompt;
+let mainWindow;
 
 function createWindow () {
 	// Create the browser window.
-	mainWindow = new BrowserWindow({ width: 1000, height: 800 });
+	mainWindow = new BrowserWindow({
+		width: 1280,
+		height: 720,
+		resizable: false,
+		fullscreenable: false
+	});
 
 	// and load the index.html of the app.
 	mainWindow.loadURL(url.format({
@@ -19,7 +24,7 @@ function createWindow () {
 		slashes: true
 	}));
 
-	mainWindow.webContents.openDevTools();
+	//mainWindow.webContents.openDevTools();
 
 	// Emitted when the window is closed.
 	mainWindow.on('closed', () => {
@@ -51,16 +56,3 @@ app.on('activate', () => {
 		createWindow();
 	}
 });
-
-// Getters and setters to access windows from other files
-app.getMainWindow = () => {
-	return mainWindow;
-};
-
-app.getAddressPrompt = () => {
-	return addressPrompt;
-};
-
-app.setAddressPrompt = (aP) => {
-	addressPrompt = aP;
-};

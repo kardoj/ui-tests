@@ -4,37 +4,44 @@ const url = require('url');
 
 const template = [
 	{
-		label: 'Tegevused',
+		label: 'Fail',
 		submenu: [
 			{
-				label: 'Navigeeri leheküljele',
-				click(item, activeWindow) { navigateToURL(); }
+				label: 'Akna suurus',
+				submenu: [
+					{
+						label: '720 x 405',
+						click(item, activeWindow) { setWindowSize(activeWindow, 720, 405); }
+					},
+					{
+						label: '1024 x 576',
+						click(item, activeWindow) { setWindowSize(activeWindow, 1024, 576); }
+					},
+					{
+						label: '1280 x 720',
+						click(item, activeWindow) { setWindowSize(activeWindow, 1280, 720); }
+					},
+					{
+						label: '1600 x 900',
+						click(item, activeWindow) { setWindowSize(activeWindow, 1600, 900); }
+					}
+				]
 			},
 			{
-				label: 'Tagasi',
-				role: 'undo'
-			},
-			{
-				label: 'Edasi',
-				role: 'redo'
+				label: 'Välju',
+				role: 'close'
 			}
 		]
 	}
 ];
 
-navigateToURL = function(activeWindow) {
-	let addressPrompt = new BrowserWindow({ width: 300, height: 200 });
+function setWindowSize(win, width, height) {
+	// Set actual window size
+	win.setSize(width, height);
 
-	addressPrompt.loadURL(url.format({
-		pathname: path.join(__dirname, '../../views/address-prompt.html'),
-		protocol: 'file:',
-		slashes: true
-	}));
-
-	addressPrompt.on('closed', () => { addressPrompt = null; });
-
-	app.setAddressPrompt(addressPrompt);
-};
+	// Trigger mainView resize
+	win.webContents.send('mainview-resize');
+}
 
 const menu = Menu.buildFromTemplate(template);
 Menu.setApplicationMenu(menu);

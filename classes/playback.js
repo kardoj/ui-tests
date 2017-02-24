@@ -1,5 +1,5 @@
 /*
-* A player that generates playbacks from recordings and plays them.
+* A player that generates playback from a recording and plays it.
 */
 function Playback(recording) {
 	this.recording = recording;

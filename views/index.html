@@ -4,8 +4,14 @@
   <meta charset="UTF-8">
   <title>Kasutajaliidese testimine</title>
   <script src="../scripts/renderer/index.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="../css/index.css">
 </head>
 <body>
-  Navigeeri tegevuste alt uuele lehele, et testimist alustada
+  <div id="context_menu" class="context-menu">
+    <input type="text" id="address_input" placeholder="http://">
+    <button type="button" id="navigate_btn">Navigeeri</button>
+  </div>
+
+  <webview id="main_view" class="main-view" src="welcome.html"></webview>
 </body>
 </html>

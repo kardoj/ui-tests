@@ -5,6 +5,7 @@
   "license": "(MIT OR Apache-2.0)",
   "main": "scripts/main/main.js",
   "devDependencies": {
-    "electron": "^1.4.15"
+    "electron": "^1.4.15",
+    "jshint": "^2.9.4"
   }
 }
