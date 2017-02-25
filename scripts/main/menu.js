@@ -28,6 +28,10 @@ const template = [
 				]
 			},
 			{
+				label: 'Konsool',
+				role: 'toggledevtools'
+			},
+			{
 				label: 'Välju',
 				role: 'close'
 			}

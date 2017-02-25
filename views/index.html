@@ -3,15 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <title>Kasutajaliidese testimine</title>
-  <script src="../scripts/renderer/index.js" charset="utf-8"></script>
   <link rel="stylesheet" href="../css/index.css">
+  <script src="../scripts/renderer/index.js" charset="utf-8"></script>
 </head>
 <body>
   <div id="context_menu" class="context-menu">
-    <input type="text" id="address_input" placeholder="http://">
+    <input type="text" id="address_input">
     <button type="button" id="navigate_btn">Navigeeri</button>
+    |
+    <button type="button" id="start_recording">Alusta salvestust</button>
   </div>
 
-  <webview id="main_view" class="main-view" src="welcome.html"></webview>
+  <webview id="main_view" class="main-view" src="welcome.html" preload="../scripts/renderer/main-view-listeners.js"></webview>
 </body>
 </html>

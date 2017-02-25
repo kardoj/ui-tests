@@ -59,5 +59,12 @@ tuleb tegeleda jooksvalt ka kirjatööga (töö hinnatav osa). Pidev ülevaatus 
 See, et ülesanne on pandud mingile kuupäevale, tähendab et ta peaks järgmiseks nädalaks valmis olema. St. teistel
 päevadel saab enne järgmist nädalat veel asja täiendada.
 
+## Progress
+* Lehekülgedele saab navigeerida
+* Akna suurust saab valida
+
 ## Mõtted
 * Mida teha nende linkidega, mis avanevad uues aknas?
+
+## Võiks teha, aga pole prioriteetsed
+* "Navigeeri" vajutades enne lehe laadimist AJAX kontroll, kas selline leht on olemas
