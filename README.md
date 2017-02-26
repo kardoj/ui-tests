@@ -62,6 +62,7 @@ päevadel saab enne järgmist nädalat veel asja täiendada.
 ## Progress
 * Lehekülgedele saab navigeerida
 * Akna suurust saab valida
+* _Guest_ lehe klikid registreeritakse _Parent_ lehel (asukohad saab kätte)
 
 ## Mõtted
 * Mida teha nende linkidega, mis avanevad uues aknas?
