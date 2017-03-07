@@ -22,6 +22,14 @@ Kasutaja tehtud hiirevajutused salvestatakse ja neid on võimalik pärast samas 
 7. Peaks kuidagi saama tagasisidet/valideerima seda rakendust nt ekspertide abil, kes proovivad mingi asja lahendada (thinkaloud testing).
 8. Kui aega jääb üle (ei jää), uurida, kuidas taasesitust optimeerida (kiirust suurendada, äkki kuidagi loobuda reaalajast)
 
+## Töögraafik
+Graafik venitas README.md liiga pikaks ja ma panin ta eraldi faili: SCHEDULE.md. Hakkan sinna ka tehtud tegevusi märkima. Üldine progress jääb ikka siia.
+
+## Progress
+* Lehekülgedele saab navigeerida
+* Akna suurust saab valida
+* _Guest_ lehe klikid registreeritakse _Parent_ lehel (asukohad saab kätte)
+
 ## Lingid
 [Blogi](http://kardo.xyz/b/veebilehestiku-testimine/)
 
@@ -29,40 +37,6 @@ Kasutaja tehtud hiirevajutused salvestatakse ja neid on võimalik pärast samas 
 Eelduseks on [Node.js](https://nodejs.org/en/) olemasolu.
 Kui repo on kloonitud, siis seal kaustas käivitada `npm install` ja rakenduse käivitamiseks samas kohas `electron .`.
 _Build_'ide lingid tulevad siia hiljem.
-
-## Töögraafik
-Iga eduka päeva lõppu kuulub blogipost saavutustega (et saaks hiljem vaadata ja tööd täiendada), lisaks
-tuleb tegeleda jooksvalt ka kirjatööga (töö hinnatav osa). Pidev ülevaatus ja eelneva osa viimistlus kuulub töö juurde.
-
-07.02 - 0, (1)
-
-14.02 - 1
-
-21.02 - 2
-
-28.02 - 2
-
-07.03 - 3
-
-14.03 - 3
-
-21.03 - 4
-
-28.03 - 5
-
-04.04 - 6
-
-11.04 - 6, 7, 8, (viimistlemine)
-
-(18.04) - 8, Viimistlemine
-
-See, et ülesanne on pandud mingile kuupäevale, tähendab et ta peaks järgmiseks nädalaks valmis olema. St. teistel
-päevadel saab enne järgmist nädalat veel asja täiendada.
-
-## Progress
-* Lehekülgedele saab navigeerida
-* Akna suurust saab valida
-* _Guest_ lehe klikid registreeritakse _Parent_ lehel (asukohad saab kätte)
 
 ## Mõtted
 * Mida teha nende linkidega, mis avanevad uues aknas?
