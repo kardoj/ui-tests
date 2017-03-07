@@ -14,6 +14,7 @@ tuleb tegeleda jooksvalt ka kirjatööga (töö hinnatav osa). Pidev ülevaatus 
 28.02 - 2
 
 07.03 - 3
+Sissejuhatus, tehnoloogiate kirjeldus
 
 14.03 - 3
 
