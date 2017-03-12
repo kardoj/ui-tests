@@ -43,8 +43,8 @@ function setWindowSize(win, width, height) {
 	// Set actual window size
 	win.setSize(width, height);
 
-	// Trigger mainView resize
-	win.webContents.send('mainview-resize');
+	// Trigger testSite resize
+	win.webContents.send('test-site-resize');
 }
 
 const menu = Menu.buildFromTemplate(template);

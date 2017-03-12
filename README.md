@@ -40,6 +40,7 @@ _Build_'ide lingid tulevad siia hiljem.
 
 ## Mõtted
 * Mida teha nende linkidega, mis avanevad uues aknas?
+* Lehe üles-alla kerimine?
 
 ## Võiks teha, aga pole prioriteetsed
 * "Navigeeri" vajutades enne lehe laadimist AJAX kontroll, kas selline leht on olemas
