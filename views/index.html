@@ -4,9 +4,11 @@
   <meta charset="UTF-8">
   <title>Kasutajaliidese testimine</title>
   <link rel="stylesheet" href="../css/index.css">
-  <script src="../scripts/renderer/const-requires.js" charset="utf-8"></script>  
+  <script src="../scripts/renderer/const-requires.js" charset="utf-8"></script>
   <script src="../scripts/renderer/index.js" charset="utf-8"></script>
-  <script src="../scripts/renderer/navigate-btn.js" charset="utf-8"></script>  
+  <script src="../scripts/renderer/navigate-btn.js" charset="utf-8"></script>
+  <script src="../scripts/renderer/start-recording-btn.js" charset="utf-8"></script>
+  <script src="../scripts/renderer/stop-recording-btn.js" charset="utf-8"></script>  
 </head>
 <body>
   <div id="context_menu" class="context-menu">
@@ -14,7 +16,7 @@
     <button type="button" id="navigate_btn">Navigeeri</button>
     |
     <button type="button" id="start_recording_btn">Alusta salvestust</button>
-    <button type="button" id="stop_recording_btn">Lõpeta salvestamine</button>
+    <button type="button" id="stop_recording_btn" disabled>Lõpeta salvestamine</button>
     |
     <button type="button" id="add_assertion_btn">Lisa kontroll</button>
   </div>
