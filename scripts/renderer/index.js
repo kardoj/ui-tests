@@ -5,7 +5,7 @@ window.onload = () => {
 	let contextMenu = $('#context_menu');
 	let testSite = $('#test_site');
 	let addressInput = $('#address_input');
-	let startRecButton = $('#start_recording');
+	let startRecButton = $('#start_recording_btn');
 
 	// Initialization when the program starts and mainWindow is opened
 	addressInput.focus();
