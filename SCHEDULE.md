@@ -21,6 +21,8 @@ Sissejuhatus, tehnoloogiate kirjeldus
 
 14.03 - 3
 
+Salvestuse elementide ja funktsioonide analüüs. Salvestuse faili salvestamine.
+
 21.03 - 4
 
 28.03 - 5
