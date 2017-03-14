@@ -3,6 +3,7 @@ $(document).ready(() => {
 	let recording = null;
 	let startTime = null;
 
+	let askRecordingNameDialogue = $('#recording-name-dialogue');
 	let startRecordingBtn = $('#start_recording_btn');
 	let stopRecordingBtn = $('#stop_recording_btn');
 	let testSite = $('#test_site');
@@ -14,7 +15,7 @@ $(document).ready(() => {
 
 		// When the recording starts, starts a new recording object
 		recording = new Recording(startTime);
-		console.log(recording);
+		// The first action in a recording must be a navigation to the start page
 	});
 
 	// Handle events from the test site
@@ -28,7 +29,23 @@ $(document).ready(() => {
 	});
 
 	stopRecordingBtn.on('stop-recording', () => {
-		$(document).trigger('save-recording', recording.toJSON());
+		// Only try to save if there are any actions in the recording
+		if (recording.hasActions) {
+			// Prompt for a name
+			$(document).trigger('ask-recording-name');
+		}
+	});
+
+	askRecordingNameDialogue.on('recording-name-set', (e, name) => {
+		// Append the timestamp to the name
+		recording.name = name + '-' + startTime;
+
+		// Save the file
+		$(document).trigger('save-recording', { name: recording.name, data: recording.toJSON() });
+	});
+
+	// Once the get-name-and-save flow has been completed, prepare for the next recording
+	$(document).on('recording-saved', () => {
 		recording = null;
 		isRecording = false;
 		startTime = null;

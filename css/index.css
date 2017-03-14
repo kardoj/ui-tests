@@ -14,3 +14,20 @@ body, html {
     padding: 0;
     width: 100%;
 }
+
+.recording-name-dialogue {
+    background-color: #FFFFFF;
+    display: none;
+    left: 0;
+    position: absolute;
+    top: 0;
+}
+
+.recording-name-title {
+    font-weight: bold;
+    padding: 3px;
+}
+
+.recording-name-content {
+    padding: 3px;
+}

@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="../css/index.css">
   <script src="../scripts/renderer/const-requires.js" charset="utf-8"></script>
   <script src="../scripts/utility.js" charset="utf-8"></script>
+  <script src="../scripts/config.js" charset="utf-8"></script>
   <script src="../scripts/classes/recording.js" charset="utf-8"></script>
   <script src="../scripts/classes/action.js" charset="utf-8"></script>
   <script src="../scripts/classes/playback.js" charset="utf-8"></script>
@@ -15,6 +16,7 @@
   <script src="../scripts/renderer/stop-recording-btn.js" charset="utf-8"></script>
   <script src="../scripts/renderer/recorder.js" charset="utf-8"></script>
   <script src="../scripts/renderer/file-saver.js" charset="utf-8"></script>
+  <script src="../scripts/renderer/recording-name-dialogue.js" charset="utf-8"></script>
 </head>
 <body>
   <div id="context_menu" class="context-menu">
@@ -28,5 +30,14 @@
   </div>
 
   <webview id="test_site" class="main-view" src="welcome.html" preload="../scripts/renderer/test-site-listeners.js"></webview>
+
+  <!-- Toggled parts -->
+  <div class="recording-name-dialogue" id="recording-name-dialogue">
+    <div class="recording-name-title">Anna testile nimi</div>
+    <div class="recording-name-content">
+      <input type="text" id="recording_name_input">
+      <button type="button" id="recording_name_btn">Salvesta</button>
+    </div>
+  </div>
 </body>
 </html>
