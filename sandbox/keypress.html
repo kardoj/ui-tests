@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Koodiga tekstiväljale teksti sisestamine</title>
+  <script
+    src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous">
+  </script>
+  <script>
+    $(document).ready(function() {
+      $('#input_button').on('click', function() {
+        var txt = $('#input_field').val();
+
+        var el = chosenEl();
+        for (var i = 0; i < txt.length; i++) {
+          el.trigger('keypress', { which: 101 })
+        }
+      });
+    });
+
+    function chosenEl() {
+      if ($('#field').is(':checked')) {
+        return $('#text_field');
+      } else if ($('#area').is(':checked')) {
+        return $('#text_area');
+      }
+    }
+  </script>
+</head>
+<body>
+  <div>
+    <input type="radio" id="field" name="group1" checked>
+    <input type="text" id="text_field">
+  </div>
+  <div>
+    <input type="radio" id="area" name="group1">
+    <textarea id="text_area" cols="30" rows="10"></textarea>
+  </div>
+  <input type="text" id="input_field">
+  <button type="button" id="input_button">Sisesta</button>
+</body>
+</html>
