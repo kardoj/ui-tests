@@ -10,7 +10,7 @@ $(document).ready(() => {
 
 	// When the window size is changed from back-end (main.js, menu.js),
 	// testSite's height needs to be recalculated to avoid content overflow
-	ipc.on('test-site-resize', () => {
+	IPC.on('test-site-resize', () => {
 		resizeTestSite();
 	});
 
