@@ -9,6 +9,7 @@ Kontrollid:
 - Sihtaadressi kontroll pärast navigeerimist
 - Elemendi atribuudi või teksti kontroll (.text, .attr)
   - Elemendil vajutades avatakse valik kõigi tema küljes olevate atribuutidega ja siis saab linnukesega valida, milliseid kontrollitakse. Nimekirjas võiks näidata ka elemendi sisu (.val, .text)
+  - Võiks olla ka lihtsalt elemendi olemasolu kontroll
 
 Märkmed:
 - Kindlasti peab kasutama getElementFromPoint(), sest sellega on hea määrata, kas element üldse olemas on

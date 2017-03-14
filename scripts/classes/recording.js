@@ -16,4 +16,8 @@ function Recording(startTime) {
 	this.getStartTime = function() {
 		return this.startTime;
 	};
+
+	this.toJSON = function() {
+		return JSON.stringify(this.recordedActions);
+	}
 }

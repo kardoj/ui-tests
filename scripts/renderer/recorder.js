@@ -28,8 +28,7 @@ $(document).ready(() => {
 	});
 
 	stopRecordingBtn.on('stop-recording', () => {
-		// TODO: Save the recording
-		console.log(recording);
+		$(document).trigger('save-recording', recording.toJSON());
 		recording = null;
 		isRecording = false;
 		startTime = null;
