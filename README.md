@@ -41,6 +41,7 @@ _Build_'ide lingid tulevad siia hiljem.
 ## Mõtted
 * Mida teha nende linkidega, mis avanevad uues aknas?
 * Lehe üles-alla kerimine?
+* Parema hiireklahvi vajutus (pigem vist veebis pole)?
 
 ## Võiks teha, aga pole prioriteetsed
 * "Navigeeri" vajutades enne lehe laadimist AJAX kontroll, kas selline leht on olemas
