@@ -9,9 +9,17 @@ $(document).ready(() => {
 	});
 
 	recordingNameBtn.on('click', () => {
+		recordingNameSet();
+	});
+
+	recordingNameInput.on('keypress', (e) => {
+		if (e.which === 13) recordingNameSet();
+	});
+
+	function recordingNameSet() {
 		if (!recordingNameInput.val()) return;
 
 		dialogue.hide();
 		dialogue.trigger('recording-name-set', recordingNameInput.val());
-	});
+	}
 });

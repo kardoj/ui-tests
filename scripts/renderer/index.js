@@ -4,9 +4,6 @@ $(document).ready(() => {
 
 	// Initialization when the program starts and mainWindow is opened
 	resizeTestSite();
-	setTimeout(function() {
-		clickEventPlaybackTest();
-	}, 3000);
 
 	// When the window size is changed from back-end (main.js, menu.js),
 	// testSite's height needs to be recalculated to avoid content overflow

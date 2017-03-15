@@ -1,5 +1,5 @@
 var Config = Config || {};
 ((ns) => {
 	ns.testLocation = 'tests';
-	ns.testFileSuffix = 'uitest';
+	ns.testFileExtension = '.uitest';
 })(Config);

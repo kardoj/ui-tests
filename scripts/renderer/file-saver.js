@@ -1,10 +1,11 @@
 $(document).ready(() => {
 	$(document).on('save-recording', (e, recordingInfo) => {
-		let location = Config.testLocation + '/' + recordingInfo.name + '.' + Config.testFileSuffix;
+		let filenameWithExtension = recordingInfo.name + Config.testFileExtension;
+		let location = PATH.join(Config.testLocation, filenameWithExtension);
 		FS.writeFile(location, recordingInfo.data, (err) => {
 			if (err) throw err;
-			console.log('Saved!');
-			$(document).trigger('recording-saved');
+
+			$(document).trigger('recording-saved', filenameWithExtension);
 		});
 	});
 });
