@@ -1,4 +1,4 @@
-var Config = Config || {};
+var Config = {};
 ((ns) => {
 	ns.testLocation = 'tests';
 	ns.testFileExtension = '.uitest';

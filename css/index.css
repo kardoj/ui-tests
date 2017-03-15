@@ -21,6 +21,7 @@ body, html {
     left: 0;
     position: absolute;
     top: 0;
+    z-index: 100;
 }
 
 .recording-name-title {
@@ -30,4 +31,15 @@ body, html {
 
 .recording-name-content {
     padding: 3px;
+}
+
+.backlayer {
+    background-color: rgba(210, 210, 210, .5);
+    display: none;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 50;
 }

@@ -2,8 +2,12 @@ $(document).ready(() => {
 	let dialogue = $('#recording-name-dialogue');
 	let recordingNameBtn = dialogue.find('#recording_name_btn');
 	let recordingNameInput = dialogue.find('#recording_name_input');
+	let backlayer = $('#backlayer');
 
 	$(document).on('ask-recording-name', (e, recording) => {
+		// Center the dialogue before showing. Every time. Just in case.
+		UiHelper.centerElement(dialogue);
+		backlayer.show();
 		dialogue.show();
 		recordingNameInput.focus();
 	});
@@ -20,6 +24,7 @@ $(document).ready(() => {
 		if (!recordingNameInput.val()) return;
 
 		dialogue.hide();
+		backlayer.hide();
 		dialogue.trigger('recording-name-set', recordingNameInput.val());
 	}
 });
