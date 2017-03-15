@@ -22,6 +22,7 @@ Sissejuhatus, tehnoloogiate kirjeldus
 14.03 - 3
 
 Salvestuse elementide ja funktsioonide analüüs. Salvestuse faili salvestamine.
+* 15.03 - Testi valik esitamiseks
 
 21.03 - 4
 
