@@ -1,5 +1,5 @@
 // Dialogue must be opened with a caller reference and an optional message, for example:
-// $(document).trigger('get-confirmation', { caller: 'delete-test-btn', message: 'Are you sure?' });
+// $(document).trigger('get-confirmation', { caller: 'delete_test_btn', message: 'Are you sure?' });
 // When the dialogue closes, it emits:
 // $(document).trigger('got-confirmation', { for: 'delete_test_btn', confirmed: true });
 // So all the callers can listen to 'got-confirmation' event and see if they got an answer
