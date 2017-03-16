@@ -23,6 +23,7 @@ Sissejuhatus, tehnoloogiate kirjeldus
 
 Salvestuse elementide ja funktsioonide analüüs. Salvestuse faili salvestamine.
 * 15.03 - Testi valik esitamiseks
+* 16.03 - Testifaili kustutamine, kinnitusdialoog
 
 21.03 - 4
 

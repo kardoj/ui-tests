@@ -29,7 +29,7 @@ Graafik venitas README.md liiga pikaks ja ma panin ta eraldi faili: SCHEDULE.md.
 * Lehekülgedele saab navigeerida
 * Akna suurust saab valida
 * _Guest_ lehe klikid registreeritakse _Parent_ lehel (asukohad saab kätte)
-* Saab luua uut testi ja selle faili salvestada
+* Saab luua uue testi, selle salvestada ja kustutada
 
 ## Lingid
 [Blogi](http://kardo.xyz/b/veebilehestiku-testimine/)
