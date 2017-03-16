@@ -15,7 +15,7 @@ body, html {
     width: 100%;
 }
 
-.recording-name-dialogue {
+.recording-name-dialogue, .confirmation-dialogue {
     background-color: #FFFFFF;
     display: none;
     left: 0;
@@ -24,13 +24,18 @@ body, html {
     z-index: 100;
 }
 
-.recording-name-title {
+.recording-name-title, .confirmation-dialogue-title {
     font-weight: bold;
     padding: 3px;
 }
 
-.recording-name-content {
+.recording-name-content, .confirmation-dialogue-content {
     padding: 3px;
+}
+
+.confirmation-dialogue-buttons {
+    padding: 3px;
+    text-align: center;
 }
 
 .backlayer {
