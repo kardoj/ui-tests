@@ -5,7 +5,7 @@ $(document).ready(() => {
 	// When 'Esita' is clicked, load the selected file into a Recording
 	// Create a playback and play the recording
 
-	$(document).on('recording-saved', (e, recordingName) => {
+	$(document).on('recording-saved recording-deleted', (e, recordingName) => {
 		readTestDirectory(recordingName);
 	});
 
