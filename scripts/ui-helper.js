@@ -1,4 +1,4 @@
-var UiHelper = {};
+let UiHelper = {};
 ((ns) => {
 	ns.centerElement = function(element) {
 		element.css({
