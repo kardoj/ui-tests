@@ -3,6 +3,8 @@ let Recorder = {};
 	let isRecording = false;
 	let recording = null;
 	let startTime = null;
+	let waitingForLoadingAfterAction = false;
+	let isLoadingAfterAction = false;
 
 	let askRecordingNameDialogue = null;
 	let startRecordingBtn = null;
@@ -26,19 +28,53 @@ let Recorder = {};
 			isRecording = true;
 			startTime = Utility.timestamp();
 
-			// When the recording starts, starts a new recording object
+			// When the recording starts, a new recording is created
 			recording = new Recording(startTime);
-			// The first action in a recording must be a navigation to the start page
+
+			// The first action in a recording must be a navigation to the test start page
+			recording.addAction(new NavAction(testSite.get(0).getURL()));
 		});
 
 		// Handle events from the test site
 		testSite.get(0).addEventListener('ipc-message', (e) => {
+			if (!isRecording) return;
 			let coords = e.args[0];
-			if (isRecording) {
-				if (e.channel == 'click-event') {
-					recording.addAction(new Action(coords.x, coords.y, Utility.timestamp()));
-				}
+
+			if (e.channel == 'click-event') {
+				recording.addAction(new ClickAction(coords.x, coords.y));
+				waitingForLoadingAfterAction = true;
+				console.log('waiting for loading');
+
+				setTimeout(() => {
+					if (isLoadingAfterAction) return;
+
+					console.log('did not start loading');
+					waitingForLoadingAfterAction = false;
+				}, Config.actionRecordingLoadingTimeout);
 			}
+		});
+
+		// Listener for the navigation actions. After an action has been recorded, this checks
+		// whether the page started loading as a result. If it did, it waits for the loading to complete
+		// and adds an URL check action
+		testSite.get(0).addEventListener('did-start-loading', () => {
+			if (!isRecording) return;
+			if (!waitingForLoadingAfterAction) return;
+
+			waitingForLoadingAfterAction = false;
+			isLoadingAfterAction = true;
+			console.log('started loading indeed');
+		});
+
+		// If the recording was waiting for the loading to finish and the loading finished,
+		// add a navigation check event
+		testSite.get(0).addEventListener('did-stop-loading', () => {
+			if (!isRecording) return;
+			if (!isLoadingAfterAction) return;
+
+			recording.addAction(new UrlCheck(testSite.get(0).getURL()));
+			console.log('finished loading');
+			isLoadingAfterAction = false;
 		});
 
 		stopRecordingBtn.on('stop-recording', () => {
@@ -63,11 +99,5 @@ let Recorder = {};
 			isRecording = false;
 			startTime = null;
 		});
-
-		// Must check the network activity from testSite after every event and when it has stopped must create
-		// a new event to check the destination address
-
-		// Listens for the recording to stop
-		// When the recording stops, saves the new recording object into a file (JSON)
 	});
 })(Recorder, $);
