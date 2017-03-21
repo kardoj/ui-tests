@@ -1,5 +1,5 @@
 $(document).ready(() => {
-	let dialogue = $('#recording-name-dialogue');
+	let dialogue = $('#recording_name_dialogue');
 	let recordingNameBtn = dialogue.find('#recording_name_btn');
 	let recordingNameInput = dialogue.find('#recording_name_input');
 	let backlayer = $('#backlayer');

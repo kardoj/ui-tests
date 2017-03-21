@@ -4,7 +4,7 @@
 // $(document).trigger('got-confirmation', { for: 'delete_test_btn', confirmed: true });
 // So all the callers can listen to 'got-confirmation' event and see if they got an answer
 $(document).ready(() => {
-	let dialogue = $('#confirmation-dialogue');
+	let dialogue = $('#confirmation_dialogue');
 	let confirmBtn = dialogue.find('#confirm_btn');
 	let cancelBtn = dialogue.find('#cancel_btn');
 	let confirmationMessageContainer = dialogue.find('#confirmation_dialogue_message');

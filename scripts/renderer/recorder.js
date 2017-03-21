@@ -3,7 +3,7 @@ $(document).ready(() => {
 	let recording = null;
 	let startTime = null;
 
-	let askRecordingNameDialogue = $('#recording-name-dialogue');
+	let askRecordingNameDialogue = $('#recording_name_dialogue');
 	let startRecordingBtn = $('#start_recording_btn');
 	let stopRecordingBtn = $('#stop_recording_btn');
 	let testSite = $('#test_site');

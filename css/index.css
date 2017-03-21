@@ -9,13 +9,13 @@ body, html {
     padding: 5px;
 }
 
-.main-view {
+.test-site {
     margin: 0;
     padding: 0;
     width: 100%;
 }
 
-.recording-name-dialogue, .confirmation-dialogue {
+.recording-name-dialogue, .confirmation-dialogue, .loading-dialogue {
     background-color: #FFFFFF;
     display: none;
     left: 0;
@@ -24,7 +24,7 @@ body, html {
     z-index: 100;
 }
 
-.recording-name-title, .confirmation-dialogue-title {
+.recording-name-title, .confirmation-dialogue-title, .loading-dialogue-title {
     font-weight: bold;
     padding: 3px;
 }

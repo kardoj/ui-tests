@@ -21,6 +21,7 @@
   <script src="../scripts/renderer/test-select.js" charset="utf-8"></script>
   <script src="../scripts/renderer/delete-test-btn.js" charset="utf-8"></script>
   <script src="../scripts/renderer/confirmation-dialogue.js" charset="utf-8"></script>
+  <script src="../scripts/renderer/test-site-loading.js" charset="utf-8"></script>
 </head>
 <body>
   <!-- Menu -->
@@ -39,10 +40,10 @@
   </div>
 
   <!-- Electron specific element for a webpage in a webpage (like an iframe) -->
-  <webview id="test_site" class="main-view" src="welcome.html" preload="../scripts/renderer/test-site-listeners.js"></webview>
+  <webview id="test_site" class="test-site" src="welcome.html" preload="../scripts/renderer/test-site-listeners.js"></webview>
 
   <!-- Toggled parts -->
-  <div class="recording-name-dialogue" id="recording-name-dialogue">
+  <div class="recording-name-dialogue" id="recording_name_dialogue">
     <div class="recording-name-title">Anna testile nimi</div>
     <div class="recording-name-content">
       <input type="text" id="recording_name_input">
@@ -50,7 +51,7 @@
     </div>
   </div>
 
-  <div class="confirmation-dialogue" id="confirmation-dialogue">
+  <div class="confirmation-dialogue" id="confirmation_dialogue">
     <div class="confirmation-dialogue-title">Palun kinnita</div>
     <div class="confirmation-dialogue-content">
       <div class="confirmation-dialogue-message" id="confirmation_dialogue_message"></div>
@@ -59,6 +60,10 @@
         <button type="button" id="cancel_btn">Ei</button>
       </div>
     </div>
+  </div>
+
+  <div class="loading-dialogue" id="loading_dialogue">
+    <div class="loading-dialogue-title">Laadimas...</div>
   </div>
 
   <div class="backlayer" id="backlayer"></div>
