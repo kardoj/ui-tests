@@ -24,6 +24,10 @@ body, html {
     z-index: 100;
 }
 
+.test-file-menu {
+    display: inline;
+}
+
 .recording-name-title, .confirmation-dialogue-title, .loading-dialogue-title {
     font-weight: bold;
     padding: 3px;

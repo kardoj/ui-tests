@@ -42,7 +42,6 @@ _Build_'ide lingid tulevad siia hiljem.
 ## Mõtted
 * Mida teha nende linkidega, mis avanevad uues aknas?
 * Parema hiireklahvi vajutus (pigem vist veebis pole)?
-* Kas on vaja mingit üldist objekti, mille sees olekut hoida (nt küsida kas salvestus käib)?
 
 ## Võiks teha, aga pole prioriteetsed
 * "Navigeeri" vajutades enne lehe laadimist AJAX kontroll, kas selline leht on olemas
