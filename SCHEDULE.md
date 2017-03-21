@@ -27,6 +27,8 @@ Salvestuse elementide ja funktsioonide analüüs. Salvestuse faili salvestamine.
 
 21.03 - 4
 
+Salvestuse mahamängimine
+
 28.03 - 5
 
 04.04 - 6

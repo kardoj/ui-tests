@@ -14,7 +14,7 @@ Kontrollid:
   - Võiks olla ka lihtsalt elemendi olemasolu kontroll
 
 Märkmed:
-- Kindlasti peab kasutama getElementFromPoint(), sest sellega on hea määrata, kas element üldse olemas on
+- Kindlasti peab kasutama document.elementFromPoint(), sest sellega on hea määrata, kas element üldse olemas on
 
 Testi salvestamine:
 - "Alusta salvestamist" vajutusega
