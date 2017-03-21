@@ -1,10 +1,9 @@
 /*
 * A recording of actions which can be played by Playback.
 */
-function Recording(startTime) {
+function Recording() {
 	this.name = null;
 	this.recordedActions = [];
-	this.startTime = startTime;
 	this.hasActions = false;
 
 	this.addAction = function(action) {
@@ -16,8 +15,8 @@ function Recording(startTime) {
 		return this.recordedActions;
 	};
 
-	this.getStartTime = function() {
-		return this.startTime;
+	this.setName = function(name) {
+		this.name = name;
 	};
 
 	this.toJSON = function() {

@@ -29,7 +29,7 @@ let Recorder = {};
 			startTime = Utility.timestamp();
 
 			// When the recording starts, a new recording is created
-			recording = new Recording(startTime);
+			recording = new Recording();
 
 			// The first action in a recording must be a navigation to the test start page
 			recording.addAction(new NavAction(testSite.get(0).getURL()));
