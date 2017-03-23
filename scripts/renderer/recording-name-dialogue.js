@@ -9,6 +9,7 @@ $(document).ready(() => {
 		UiHelper.centerElement(dialogue);
 		backlayer.show();
 		dialogue.show();
+		recordingNameInput.val('');
 		recordingNameInput.focus();
 	});
 

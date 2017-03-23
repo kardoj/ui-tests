@@ -3,8 +3,6 @@ let Recorder = {};
 	let isRecording = false;
 	let recording = null;
 	let startTime = null;
-	let waitingForLoadingAfterAction = false;
-	let isLoadingAfterAction = false;
 
 	let askRecordingNameDialogue = null;
 	let startRecordingBtn = null;
@@ -42,39 +40,14 @@ let Recorder = {};
 
 			if (e.channel == 'click-event') {
 				recording.addAction(new ClickAction(coords.x, coords.y));
-				waitingForLoadingAfterAction = true;
-				console.log('waiting for loading');
-
-				setTimeout(() => {
-					if (isLoadingAfterAction) return;
-
-					console.log('did not start loading');
-					waitingForLoadingAfterAction = false;
-				}, Config.actionRecordingLoadingTimeout);
+				$(document).trigger('recorded-an-action');
 			}
 		});
 
-		// Listener for the navigation actions. After an action has been recorded, this checks
-		// whether the page started loading as a result. If it did, it waits for the loading to complete
-		// and adds an URL check action
-		testSite.get(0).addEventListener('did-start-loading', () => {
-			if (!isRecording) return;
-			if (!waitingForLoadingAfterAction) return;
-
-			waitingForLoadingAfterAction = false;
-			isLoadingAfterAction = true;
-			console.log('started loading indeed');
-		});
-
-		// If the recording was waiting for the loading to finish and the loading finished,
-		// add a navigation check event
-		testSite.get(0).addEventListener('did-stop-loading', () => {
-			if (!isRecording) return;
-			if (!isLoadingAfterAction) return;
-
+		// When an action initialized loading (link to another page),
+		// UrlCheck action will be added when the loading finishes
+		$(document).on('finished-loading-after-recording-an-action', () => {
 			recording.addAction(new UrlCheck(testSite.get(0).getURL()));
-			console.log('finished loading');
-			isLoadingAfterAction = false;
 		});
 
 		stopRecordingBtn.on('stop-recording', () => {
