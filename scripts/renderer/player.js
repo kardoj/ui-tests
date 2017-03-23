@@ -27,8 +27,7 @@ let Player = {};
 
 				recording.setName(jsonData.name);
 				for (var i = 0; i < jsonData.actions.length; i++) {
-					// Determine which action (actions and checks probably need a type)
-					// Map it back
+					recording.addAction(ActionParser.parse(jsonData.actions[i]));
 				}
 			});
 
@@ -37,7 +36,7 @@ let Player = {};
 			// Play the recording
 
 			$(document).trigger('stop-playback');
-			contextMenu.find('input').removeAttr('disabled');
+			contextMenu.find(':input').removeAttr('disabled');
 
 		});
 	});
