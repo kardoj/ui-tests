@@ -2,6 +2,7 @@ let Player = {};
 ((ns, $) => {
 	let isPlaying = false;
 	let recording = null;
+	let performedActionCount = 0;
 
 	let contextMenu = null;
 	let playTestBtn = null;
@@ -19,25 +20,47 @@ let Player = {};
 		testSite = $('#test_site');
 
 		playTestBtn.on('start-playback', (e, filename) => {
-			FS.readFile(PATH.join(Config.testLocation, filename), (err, data) => {
-				if (err) throw err;
+			$(document).trigger('read-recording', PATH.join(Config.testLocation, filename));
+		});
 
-				let jsonData = JSON.parse(data);
-				recording = new Recording();
+		$(document).on('recording-loaded', (e, data) => {
+			let jsonData = JSON.parse(data.filedata);
+			recording = new Recording();
 
-				recording.setName(jsonData.name);
-				for (var i = 0; i < jsonData.actions.length; i++) {
-					recording.addAction(ActionParser.parse(jsonData.actions[i]));
-				}
-			});
+			recording.setName(jsonData.name);
+			for (let i = 0; i < jsonData.actions.length; i++) {
+				recording.addAction(ActionParser.parse(jsonData.actions[i]));
+			}
 
+			startPlayback();
+		});
+
+		$(document).on('finished-loading-after-performing-an-action did-not-start-loading-after-action', () => {
+			if (!isPlaying) return;
+			if (performedActionCount !== recording.getActionCount()) {
+				performNextAction();
+			} else {
+				stopPlayback();
+			}
+		});
+
+		function startPlayback() {
 			isPlaying = true;
+			performNextAction();
+		}
 
-			// Play the recording
+		function performNextAction() {
+			recording.getAction(performedActionCount).perform();
+			performedActionCount++;
+			$(document).trigger('performed-an-action');
+		}
 
+		function stopPlayback() {
+			isPlaying = false;
+			performedActionCount = 0;
+			recording = null;
 			$(document).trigger('stop-playback');
 			contextMenu.find(':input').removeAttr('disabled');
-
-		});
+		}
 	});
 })(Player, $);

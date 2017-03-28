@@ -7,4 +7,8 @@ function ClickAction(x, y) {
 		let el = document.elementFromPoint(this.x, this.y);
 		el.click();
 	};
+
+	this.perform = function() {
+		console.log('performed click action');
+	}
 }

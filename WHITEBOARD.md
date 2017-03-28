@@ -20,7 +20,7 @@ Testi salvestamine:
 - "Alusta salvestamist" vajutusega
   - luuakse navigeerimistegevus hetkel avatud lehele
 - Hiirevajutusel salvestatakse klikk tegevusena
-  - Kontrollitakse, kas pärat klikki hakkas leht laadima, kui hakkas
+  - Kontrollitakse, kas pärast klikki hakkas leht laadima, kui hakkas
     - oodatakse ära kuni leht on laetud
     - sisestatakse aadressi kontroll
   - Kui ei hakanud pärast klikki laadima

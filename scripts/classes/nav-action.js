@@ -5,4 +5,8 @@ function NavAction(url) {
 	this.play = function(webview) {
 		webview.loadUrl(this.url);
 	};
+
+	this.perform = function() {
+		console.log('performed nav action');
+	};
 }

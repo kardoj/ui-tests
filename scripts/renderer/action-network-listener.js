@@ -18,6 +18,7 @@ $(document).ready(() => {
 			if (isLoadingAfterAction) return;
 
 			waitingForLoadingAfterAction = false;
+			$(document).trigger('did-not-start-loading-after-action');
 			console.log('did not start loading after action');
 		}, Config.actionLoadingTimeout);
 	});

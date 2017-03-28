@@ -5,4 +5,8 @@ function UrlCheck(url) {
 	this.check = function(webview) {
 		return webview.getUrl() == this.url;
 	};
+
+	this.perform = function() {
+		console.log('performed url check');
+	};
 }
