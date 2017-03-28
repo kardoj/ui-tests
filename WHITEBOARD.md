@@ -28,5 +28,15 @@ Testi salvestamine:
 
 Testi taasesitamine:
 - "Esita" vajutusega
-  - Mängitakse järjest tegevused ja kontrollid. Kui pärast tegevuse tegemist hakkas leht laadima, oodatakse laadimise lõppu enne järgmise tegevuse tegemist. Vastasel juhul oodatakse
-    konfiguratsioonis määratud aeg (nt. 3 sekundit) ja käivitatakse seejärel järgmine tegevus
+  - Laetakse failist testi sisu recordingusse tagasi
+  - Playeri sees tehakse:
+    - isPlaying true
+    - Recordingule lisada getActionCount(), et player saaks küsida mitu actionit on kokku
+    - Player esitab (mingi actionPerformer on ilmselt vaja) ükshaaval actioneid:
+      - Esitab actioni ära ja hoiab sisemiselt meeles, mitmes esitati (performedCount)
+      - Saadab dokumendina signaali performed-an-action
+      - Ootab dokumendilt vastust, kas finished-loading-after-performing-an-action või  did-not-start-loading-after-an-action
+      - Kui kumbki signaalidest tuleb ja performedCount != recording.getActionCount(), esitab uue actioni
+      - Kui kumbki signaalidest tuleb ja performedCount == recording.getActionCount(),
+      lõpetab taasesituse ja kuvab kokkuvõtte
+      - isPlaying false
