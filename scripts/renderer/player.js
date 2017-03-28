@@ -46,11 +46,13 @@ let Player = {};
 
 		function startPlayback() {
 			isPlaying = true;
+			testSite.get(0).openDevTools();
 			performNextAction();
 		}
 
 		function performNextAction() {
-			recording.getAction(performedActionCount).perform();
+			console.log('performed an action');
+			recording.getAction(performedActionCount).perform(testSite);
 			performedActionCount++;
 			$(document).trigger('performed-an-action');
 		}

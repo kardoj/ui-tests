@@ -9,6 +9,7 @@ window.onload = () => {
 
 	// Receive clicks from the parent page
 	ipcRenderer.on('click-playback', (e, coords) => {
-		console.log(coords);
+		console.log(document.elementFromPoint(coords.x, coords.y));
+		document.elementFromPoint(coords.x, coords.y).click();
 	});
 };

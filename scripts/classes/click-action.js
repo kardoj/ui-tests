@@ -3,12 +3,8 @@ function ClickAction(x, y) {
 	this.y = y;
 	this.type = ActionParser.CLICK_ACTION;
 
-	this.play = function(document) {
-		let el = document.elementFromPoint(this.x, this.y);
-		el.click();
-	};
-
-	this.perform = function() {
+	this.perform = function(webview) {
+		webview.get(0).send('click-playback', { x: this.x, y: this.y });
 		console.log('performed click action');
 	}
 }

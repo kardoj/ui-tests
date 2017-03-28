@@ -2,11 +2,8 @@ function UrlCheck(url) {
 	this.url = url;
 	this.type = ActionParser.URL_CHECK;
 
-	this.check = function(webview) {
-		return webview.getUrl() == this.url;
-	};
-
-	this.perform = function() {
+	this.perform = function(webview) {
 		console.log('performed url check');
+		console.log('Url check result: ' + webview.get(0).getURL() == this.url);
 	};
 }

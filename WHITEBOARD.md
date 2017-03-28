@@ -1,5 +1,5 @@
 Tegevused:
-- Hiirevajutus (.focus mitte .click)
+- Hiirevajutus
 - Tähemärgi sisestamine
 - Testsaidi kerimine
   - Luuakse tegevus, mis kerib lehe soovitud kohta
