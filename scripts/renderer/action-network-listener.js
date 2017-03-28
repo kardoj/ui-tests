@@ -1,15 +1,15 @@
-// A little layer between the main webview (testSite) and the recorder.
-// The recorder records an action and signals to this thing that it recorded an action.
+// A little layer between the main webview (testSite) and the recorder or player.
+// The performer performs an action and signals to this thing that it did that.
 // Then this thing starts to listen to the network activity. If it identifies
-// Network activity in a predefined timeframe, it waits for the activity to complete
-// and signals back to the recorder that the loading is done.
+// network activity in a predefined timeframe, it waits for the activity to complete
+// and signals back to the performer that the loading is done and the next action can be performed.
 $(document).ready(() => {
 	let waitingForLoadingAfterAction = false;
 	let isLoadingAfterAction = false;
 
 	let testSite = $('#test_site');
 
-	$(document).on('recorded-an-action', () => {
+	$(document).on('performed-an-action', () => {
 		waitingForLoadingAfterAction = true;
 
 		// Cancel waiting after set time if loading has not started
@@ -17,7 +17,7 @@ $(document).ready(() => {
 			if (isLoadingAfterAction) return;
 
 			waitingForLoadingAfterAction = false;
-		}, Config.actionRecordingLoadingTimeout);
+		}, Config.actionLoadingTimeout);
 	});
 
 	// Listener for the navigation actions. After an action has been recorded, this checks
@@ -29,7 +29,6 @@ $(document).ready(() => {
 
 		waitingForLoadingAfterAction = false;
 		isLoadingAfterAction = true;
-		console.log('started loading indeed');
 	});
 
 	// If the recording was waiting for the loading to finish and the loading finished,
@@ -38,8 +37,7 @@ $(document).ready(() => {
 		if (!Recorder.isRecording()) return;
 		if (!isLoadingAfterAction) return;
 
-		$(document).trigger('finished-loading-after-recording-an-action');
-		console.log('finished loading');
+		$(document).trigger('finished-loading-after-performing-an-action');
 		isLoadingAfterAction = false;
 	});
 });

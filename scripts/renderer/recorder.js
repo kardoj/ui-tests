@@ -40,13 +40,13 @@ let Recorder = {};
 
 			if (e.channel == 'click-event') {
 				recording.addAction(new ClickAction(coords.x, coords.y));
-				$(document).trigger('recorded-an-action');
+				$(document).trigger('performed-an-action');
 			}
 		});
 
 		// When an action initialized loading (link to another page),
 		// UrlCheck action will be added when the loading finishes
-		$(document).on('finished-loading-after-recording-an-action', () => {
+		$(document).on('finished-loading-after-performing-an-action', () => {
 			recording.addAction(new UrlCheck(testSite.get(0).getURL()));
 		});
 
