@@ -23,9 +23,6 @@ $(document).ready(() => {
 		}, Config.actionLoadingTimeout);
 	});
 
-	// Listener for the navigation actions. After an action has been recorded, this checks
-	// whether the page started loading as a result. If it did, it waits for the loading to complete
-	// and adds an URL check action
 	testSite.get(0).addEventListener('did-start-loading', () => {
 		if (!Recorder.isRecording() && !Player.isPlaying()) return;
 		if (!waitingForLoadingAfterAction) return;
