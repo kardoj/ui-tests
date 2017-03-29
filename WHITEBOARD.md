@@ -40,3 +40,10 @@ Testi taasesitamine:
       - Kui kumbki signaalidest tuleb ja performedCount == recording.getActionCount(),
       lõpetab taasesituse ja kuvab kokkuvõtte
       - isPlaying false
+
+Kuidas taasesitusel olla kindle, et suheldakse sama elemendiga, millega testi ajal?
+- Salvestada clickActioni juurde element.tagName ja kontrollida taasesitusel, kas punktist saadud element on sama tagName'ga (DIV, BUTTON, BODY)?
+- Kas oleks mõttekas lisada ka atribuudid ja nende kontroll (võivad arenduse käigus muutuda)?
+- Salvestada elemendi XPath (asukoht dokumendipuus) ja taasesitusel seda kontrollida?
+
+- Teeks esialgu tagName'ga, sellest peaks koos urlide checkidega piisama
