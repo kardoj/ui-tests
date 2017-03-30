@@ -3,7 +3,7 @@ function NavAction(url) {
 	this.type = ActionParser.NAV_ACTION;
 
 	this.perform = function(webview) {
-		webview.get(0).loadURL(this.url);
-		console.log('performed nav action');
+		let actionData = { url: this.url };
+		webview.get(0).send('nav-action', actionData );
 	};
 }

@@ -36,10 +36,10 @@ let Recorder = {};
 		// Handle events from the test site
 		testSite.get(0).addEventListener('ipc-message', (e) => {
 			if (!isRecording) return;
-			let coords = e.args[0];
+			let actionData = e.args[0];
 
 			if (e.channel == 'click-event') {
-				recording.addAction(new ClickAction(coords.x, coords.y));
+				recording.addAction(new ClickAction(actionData.x, actionData.y, actionData.tagName));
 				$(document).trigger('performed-an-action');
 			}
 		});

@@ -4,30 +4,29 @@
 // network activity in a predefined timeframe, it waits for the activity to complete
 // and signals back to the performer that the loading is done and the next action can be performed.
 $(document).ready(() => {
-	let waitingForLoadingAfterAction = false;
 	let isLoadingAfterAction = false;
+	let waitingForLoadingTimeout = null;
 
 	let testSite = $('#test_site');
 
 	$(document).on('performed-an-action', () => {
-		waitingForLoadingAfterAction = true;
 		console.log('waiting for loading to start after action');
 
 		// Cancel waiting after set time if loading has not started
-		setTimeout(() => {
-			if (isLoadingAfterAction) return;
-
-			waitingForLoadingAfterAction = false;
+		waitingForLoadingTimeout = setTimeout(() => {
 			$(document).trigger('did-not-start-loading-after-action');
 			console.log('did not start loading after action');
 		}, Config.actionLoadingTimeout);
 	});
 
+	// If the page started loading while waitingForLoadingTimeout was ticking
 	testSite.get(0).addEventListener('did-start-loading', () => {
-		if (!Recorder.isRecording() && !Player.isPlaying()) return;
-		if (!waitingForLoadingAfterAction) return;
+		if (!Recorder.isRecording() && !Player.isPlaying() && waitingForLoadingTimeout === null) return;
 
-		waitingForLoadingAfterAction = false;
+		// Clear loading timeout so it won't fire later anyway
+		clearTimeout(waitingForLoadingTimeout);
+		waitingForLoadingTimeout = null;
+
 		isLoadingAfterAction = true;
 		console.log('started loading after action');
 	});
@@ -35,8 +34,7 @@ $(document).ready(() => {
 	// If the recording was waiting for the loading to finish and the loading finished,
 	// add a navigation check event
 	testSite.get(0).addEventListener('did-stop-loading', () => {
-		if (!Recorder.isRecording() && !Player.isPlaying()) return;
-		if (!isLoadingAfterAction) return;
+		if (!Recorder.isRecording() && !Player.isPlaying() && !isLoadingAfterAction) return;
 
 		$(document).trigger('finished-loading-after-performing-an-action');
 		isLoadingAfterAction = false;

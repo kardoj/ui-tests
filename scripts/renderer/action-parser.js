@@ -11,7 +11,7 @@ let ActionParser = {};
 	ns.parse = function(actionJSON) {
 		switch(actionJSON.type) {
 			case ns.CLICK_ACTION:
-				return new ClickAction(actionJSON.x, actionJSON.y);
+				return new ClickAction(actionJSON.x, actionJSON.y, actionJSON.tagName);
 			case ns.NAV_ACTION:
 				return new NavAction(actionJSON.url);
 			case ns.URL_CHECK:

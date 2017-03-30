@@ -1,10 +1,16 @@
-function ClickAction(x, y) {
+function ClickAction(x, y, tagName) {
 	this.x = x;
 	this.y = y;
+	this.tagName = tagName;
 	this.type = ActionParser.CLICK_ACTION;
 
 	this.perform = function(webview) {
-		webview.get(0).send('click-playback', { x: this.x, y: this.y });
-		console.log('performed click action');
+		let actionData = {
+			x: this.x,
+			y: this.y,
+			tagName: this.tagName
+		};
+
+		webview.get(0).send('click-playback', actionData );
 	}
 }

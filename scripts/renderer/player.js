@@ -3,6 +3,7 @@ let Player = {};
 	let isPlaying = false;
 	let recording = null;
 	let performedActionCount = 0;
+	let waitingForTestsiteToPerform = false;
 
 	let contextMenu = null;
 	let playTestBtn = null;
@@ -46,15 +47,36 @@ let Player = {};
 
 		function startPlayback() {
 			isPlaying = true;
-			testSite.get(0).openDevTools();
 			performNextAction();
 		}
 
 		function performNextAction() {
-			console.log('performed an action');
 			recording.getAction(performedActionCount).perform(testSite);
 			performedActionCount++;
+			waitingForTestsiteToPerform = true;
+		}
+
+		// Listen to testsite action feedback
+		$(testSite).get(0).addEventListener('ipc-message', (e) => {
+			if (!waitingForTestsiteToPerform && !isPlaying) return;
+
+			waitingForTestsiteToPerform = false;
+
+			let actionData = e.args[0];
+			if (e.channel == 'action-playback-success') advance(actionData.message);
+			if (e.channel == 'action-playback-failure') abort(actionData.message);
+		});
+
+		// Moves on to the next action after testSite has completed the action
+		function advance(message) {
+			console.log('ACTION SUCCESS: ' + message);
 			$(document).trigger('performed-an-action');
+		}
+
+		// Aborts the currently running test and resets everything
+		function abort(message) {
+			console.log('ACTION FAIL: ' + message);
+			stopPlayback();
 		}
 
 		function stopPlayback() {
@@ -63,6 +85,7 @@ let Player = {};
 			recording = null;
 			$(document).trigger('stop-playback');
 			contextMenu.find(':input').removeAttr('disabled');
+			console.log('TEST COMPLETED SUCCESSFULLY!');
 		}
 	});
 })(Player, $);

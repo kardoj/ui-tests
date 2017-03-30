@@ -3,7 +3,7 @@ function UrlCheck(url) {
 	this.type = ActionParser.URL_CHECK;
 
 	this.perform = function(webview) {
-		console.log('performed url check');
-		console.log('Url check result: ' + webview.get(0).getURL() == this.url);
+		let actionData = { url: this.url };
+		webview.get(0).send('url-check', actionData );
 	};
 }
