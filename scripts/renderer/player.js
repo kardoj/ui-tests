@@ -9,7 +9,7 @@ let Player = {};
 	let playTestBtn = null;
 	let testSite = null;
 
-	// Public methods
+	// Public functions
 	ns.isPlaying = function() {
 		return isPlaying;
 	};
@@ -21,22 +21,15 @@ let Player = {};
 		testSite = $('#test_site');
 
 		playTestBtn.on('start-playback', (e, filename) => {
-			$(document).trigger('read-recording', PATH.join(Config.testLocation, filename));
+			$(document).trigger('load-recording', PATH.join(Config.testLocation, filename));
 		});
 
 		$(document).on('recording-loaded', (e, data) => {
-			let jsonData = JSON.parse(data.filedata);
-			recording = new Recording();
-
-			recording.setName(jsonData.name);
-			for (let i = 0; i < jsonData.actions.length; i++) {
-				recording.addAction(ActionParser.parse(jsonData.actions[i]));
-			}
-
+			populateRecording(data.filedata);
 			startPlayback();
 		});
 
-		$(document).on('finished-loading-after-performing-an-action did-not-start-loading-after-action', () => {
+		$(document).on('finished-loading-after-action', () => {
 			if (!isPlaying) return;
 			if (performedActionCount !== recording.getActionCount()) {
 				performNextAction();
@@ -44,6 +37,35 @@ let Player = {};
 				stopPlayback();
 			}
 		});
+
+		$(document).on('did-not-start-loading-after-action', () => {
+			if (!isPlaying) return;
+			if (performedActionCount !== recording.getActionCount()) {
+				setTimeout(() => { performNextAction(); }, Config.actionTimeout);
+			} else {
+				stopPlayback();
+			}
+		});
+
+		// Listen to testsite action feedback
+		$(testSite).get(0).addEventListener('ipc-message', (e) => {
+			if (!isPlaying) return;
+			if (!waitingForTestsiteToPerform) return;
+
+			waitingForTestsiteToPerform = false;
+
+			let actionData = e.args[0];
+			if (e.channel == 'action-playback-success') advance(actionData.message);
+			if (e.channel == 'action-playback-failure') abort(actionData.message);
+		});
+
+		function populateRecording(dataFromFile) {
+			let jsonData = JSON.parse(dataFromFile);
+			recording = new Recording();
+
+			recording.setName(jsonData.name);
+			for (let i = 0; i < jsonData.actions.length; i++) recording.addAction(ActionParser.parse(jsonData.actions[i]));
+		}
 
 		function startPlayback() {
 			isPlaying = true;
@@ -55,17 +77,6 @@ let Player = {};
 			performedActionCount++;
 			waitingForTestsiteToPerform = true;
 		}
-
-		// Listen to testsite action feedback
-		$(testSite).get(0).addEventListener('ipc-message', (e) => {
-			if (!waitingForTestsiteToPerform && !isPlaying) return;
-
-			waitingForTestsiteToPerform = false;
-
-			let actionData = e.args[0];
-			if (e.channel == 'action-playback-success') advance(actionData.message);
-			if (e.channel == 'action-playback-failure') abort(actionData.message);
-		});
 
 		// Moves on to the next action after testSite has completed the action
 		function advance(message) {
@@ -80,12 +91,20 @@ let Player = {};
 		}
 
 		function stopPlayback() {
+			showTestResult();
 			isPlaying = false;
 			performedActionCount = 0;
 			recording = null;
 			$(document).trigger('stop-playback');
 			contextMenu.find(':input').removeAttr('disabled');
-			console.log('TEST COMPLETED SUCCESSFULLY!');
+		}
+
+		function showTestResult() {
+			if (recording.getActionCount() == performedActionCount) {
+				console.log('TEST COMPLETED SUCCESSFULLY!');
+			} else {
+				console.log('TEST FAILED (' + performedActionCount + '/' + recording.getActionCount() + ')!');
+			}
 		}
 	});
 })(Player, $);

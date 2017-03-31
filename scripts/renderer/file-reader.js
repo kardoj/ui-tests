@@ -1,5 +1,5 @@
 $(document).ready(() => {
-	$(document).on('read-recording', (e, filepath) => {
+	$(document).on('load-recording', (e, filepath) => {
 		FS.readFile(filepath, (err, data) => {
 			if (err) throw err;
 

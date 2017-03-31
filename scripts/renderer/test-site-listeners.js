@@ -15,8 +15,8 @@ window.onload = () => {
 		let info = ', actual: ' + actualTag + ', expected: ' + expectedTag;
 
 		if (actualTag == expectedTag) {
-			document.elementFromPoint(coords.x, coords.y).click();
 			ipcRenderer.sendToHost('action-playback-success', { message: 'Peformed click action successfully' + info });
+			el.click();
 		} else {
 			ipcRenderer.sendToHost('action-playback-failure', { message: 'Performed a failed click action' + info });
 		}
@@ -35,7 +35,7 @@ window.onload = () => {
 	});
 
 	ipcRenderer.on('nav-action', (e, actionData) => {
-		window.location.href = actionData.url;
 		ipcRenderer.sendToHost('action-playback-success', { message: 'Peformed nav action successfully: ' + actionData.url });
+		window.location = actionData.url;
 	});
 };

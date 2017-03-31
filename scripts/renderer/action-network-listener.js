@@ -21,7 +21,8 @@ $(document).ready(() => {
 
 	// If the page started loading while waitingForLoadingTimeout was ticking
 	testSite.get(0).addEventListener('did-start-loading', () => {
-		if (!Recorder.isRecording() && !Player.isPlaying() && waitingForLoadingTimeout === null) return;
+		if (!Recorder.isRecording() && !Player.isPlaying()) return;
+		if (waitingForLoadingTimeout === null) return;
 
 		// Clear loading timeout so it won't fire later anyway
 		clearTimeout(waitingForLoadingTimeout);
@@ -34,10 +35,11 @@ $(document).ready(() => {
 	// If the recording was waiting for the loading to finish and the loading finished,
 	// add a navigation check event
 	testSite.get(0).addEventListener('did-stop-loading', () => {
-		if (!Recorder.isRecording() && !Player.isPlaying() && !isLoadingAfterAction) return;
+		if (!Recorder.isRecording() && !Player.isPlaying()) return;
+		if (!isLoadingAfterAction) return;
 
-		$(document).trigger('finished-loading-after-performing-an-action');
-		isLoadingAfterAction = false;
 		console.log('finished loading after action');
+		$(document).trigger('finished-loading-after-action');
+		isLoadingAfterAction = false;
 	});
 });

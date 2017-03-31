@@ -46,7 +46,7 @@ let Recorder = {};
 
 		// When an action initialized loading (link to another page),
 		// UrlCheck action will be added after the loading has finished
-		$(document).on('finished-loading-after-performing-an-action', () => {
+		$(document).on('finished-loading-after-action', () => {
 			if (!isRecording) return;
 			recording.addAction(new UrlCheck(testSite.get(0).getURL()));
 		});

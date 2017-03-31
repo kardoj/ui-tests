@@ -36,6 +36,7 @@ Graafik venitas README.md liiga pikaks ja ma panin ta eraldi faili: SCHEDULE.md.
 
 ## Käivitamine (Windows)
 Eelduseks on [Node.js](https://nodejs.org/en/) olemasolu.
+Vajalik võib olla Electron'i globaalselt installeerimine `npm install -g electron`.
 Kui repo on kloonitud, siis seal kaustas käivitada `npm install` ja rakenduse käivitamiseks samas kohas `electron .`.
 _Build_'ide lingid tulevad siia hiljem.
 

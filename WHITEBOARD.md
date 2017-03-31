@@ -35,7 +35,7 @@ Testi taasesitamine:
     - Player esitab (mingi actionPerformer on ilmselt vaja) ükshaaval actioneid:
       - Esitab actioni ära ja hoiab sisemiselt meeles, mitmes esitati (performedCount)
       - Saadab dokumendina signaali performed-an-action
-      - Ootab dokumendilt vastust, kas finished-loading-after-performing-an-action või  did-not-start-loading-after-an-action
+      - Ootab dokumendilt vastust, kas finished-loading-after-action või  did-not-start-loading-after-an-action
       - Kui kumbki signaalidest tuleb ja performedCount != recording.getActionCount(), esitab uue actioni
       - Kui kumbki signaalidest tuleb ja performedCount == recording.getActionCount(),
       lõpetab taasesituse ja kuvab kokkuvõtte
