@@ -9,10 +9,11 @@ window.onload = () => {
 	});
 
 	ipcRenderer.on('click-playback', (e, actionData) => {
+		console.log('click-playback indeed');
 		let el = document.elementFromPoint(actionData.x, actionData.y);
 		let expectedTag = actionData.tagName;
 		let actualTag = el.tagName;
-		let info = ', actual: ' + actualTag + ', expected: ' + expectedTag;
+		let info = ', expected: ' + expectedTag + ', actual: ' + actualTag;
 
 		if (actualTag == expectedTag) {
 			ipcRenderer.sendToHost('action-playback-success', { message: 'Peformed click action successfully' + info });
@@ -25,7 +26,7 @@ window.onload = () => {
 	ipcRenderer.on('url-check', (e, actionData) => {
 		let currentURL = window.location.href;
 		let expectedURL = actionData.url;
-		let info = ', actual: ' + currentURL + ', expected: ' + expectedURL;
+		let info = ', expected: ' + expectedURL + ', actual: ' + currentURL;
 
 		if (currentURL == expectedURL) {
 			ipcRenderer.sendToHost('action-playback-success', { message: 'Peformed url check successfully' + info });
@@ -35,6 +36,8 @@ window.onload = () => {
 	});
 
 	ipcRenderer.on('nav-action', (e, actionData) => {
+		console.log('nav-action indeed');
+
 		ipcRenderer.sendToHost('action-playback-success', { message: 'Peformed nav action successfully: ' + actionData.url });
 		window.location = actionData.url;
 	});
