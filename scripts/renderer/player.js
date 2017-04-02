@@ -21,7 +21,7 @@ let Player = {};
 		testSite = $('#test_site');
 
 		playTestBtn.on('start-playback', (e, filename) => {
-			testSite.get(0).openDevTools();
+			//testSite.get(0).openDevTools();
 			$(document).trigger('load-recording', PATH.join(Config.testLocation, filename));
 		});
 
@@ -74,9 +74,11 @@ let Player = {};
 		}
 
 		function performNextAction() {
-			recording.getAction(performedActionCount).perform(testSite);
+			console.log('performed action ' + performedActionCount);
+			let act = recording.getAction(performedActionCount);
+			act.perform(testSite);
 			performedActionCount++;
-			console.log('performed an action ' + performedActionCount);
+			console.log(act);
 			waitingForTestsiteToPerform = true;
 		}
 

@@ -3,6 +3,7 @@ Tegevused:
 - Tähemärgi sisestamine
 - Testsaidi kerimine
   - Luuakse tegevus, mis kerib lehe soovitud kohta
+  - Testi salvestamisel kontrollitakse enne ClickActionit, kas window.scrollX või window.scrollY on nullist erinevad. Kui on, luuakse scrollAction praegusele kohale.
 Pärast iga tegevust peab kontrollima, kas leht hakkas laadima. Kui hakkas, siis laadimise lõpetamisel tuleb genereerida tegevus sihtaadressi kontrolliga.
 
 Üks natuke teist tüüpi tegevus on navigeerimistegevus. Sellega liigutakse lihtsalt ühelt lehelt teisele. Navigeerimistegevusega paralleelselt käib alati sihtaadressi kontroll.

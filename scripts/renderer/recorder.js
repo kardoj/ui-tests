@@ -38,6 +38,11 @@ let Recorder = {};
 			if (!isRecording) return;
 			let actionData = e.args[0];
 
+			if (e.channel == 'scroll-event') {
+				recording.addAction(new ScrollAction(actionData.x, actionData.y));
+				$(document).trigger('performed-an-action');
+			}
+
 			if (e.channel == 'click-event') {
 				recording.addAction(new ClickAction(actionData.x, actionData.y, actionData.tagName));
 				$(document).trigger('performed-an-action');
