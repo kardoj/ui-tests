@@ -11,6 +11,6 @@ function ClickAction(x, y, tagName) {
 			tagName: this.tagName
 		};
 
-		webview.get(0).send('click-playback', actionData );
+		webview.get(0).send('click-playback', actionData);
 	}
 }

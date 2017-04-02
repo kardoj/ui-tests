@@ -52,3 +52,6 @@ _Buildide_ lingid tulevad siia hiljem.
   - Arenduse käigus on selgunud, et Electroni ja tema `<webview>` _tagi_ kasutades on võimalik kuulata `did-start-loading` ja `did-stop-loading` _evente_,
     mis teeb võimalikuks testide esitamise nii kiiresti, kui see võrgu poolt võimaldatud on.
 * `alert()`'iga või `prompt()`'iga ei suuda tester midagi teha
+* Valikukast ei tööta
+* Sisestus ei tööta nuppu all hoides (saadetakse ainult keyup)
+* Enteriga _submittimise_ asemel peab kasutama hiirt

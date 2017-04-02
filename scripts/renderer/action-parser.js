@@ -5,6 +5,7 @@ let ActionParser = {};
 	ns.CLICK_ACTION = 1;
 	ns.NAV_ACTION = 2;
 	ns.SCROLL_ACTION = 3;
+	ns.INPUT_ACTION = 4;
 
 	// Check types
 	ns.URL_CHECK = 11;
@@ -17,6 +18,8 @@ let ActionParser = {};
 				return new NavAction(actionJSON.url);
 			case ns.SCROLL_ACTION:
 				return new ScrollAction(actionJSON.x, actionJSON.y);
+			case ns.INPUT_ACTION:
+				return new InputAction(actionJSON.x, actionJSON.y, actionJSON.input);
 			case ns.URL_CHECK:
 				return new UrlCheck(actionJSON.url);
 		}

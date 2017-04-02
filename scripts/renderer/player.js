@@ -77,7 +77,6 @@ let Player = {};
 			console.log('performed action ' + performedActionCount);
 			let act = recording.getAction(performedActionCount);
 			act.perform(testSite);
-			performedActionCount++;
 			console.log(act);
 			waitingForTestsiteToPerform = true;
 		}
@@ -85,6 +84,7 @@ let Player = {};
 		// Moves on to the next action after testSite has completed the action
 		function advance(message) {
 			console.log('ACTION SUCCESS: ' + message);
+			performedActionCount++;
 			$(document).trigger('performed-an-action');
 		}
 

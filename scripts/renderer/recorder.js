@@ -47,6 +47,13 @@ let Recorder = {};
 				recording.addAction(new ClickAction(actionData.x, actionData.y, actionData.tagName));
 				$(document).trigger('performed-an-action');
 			}
+
+			if (e.channel == 'input-event') {
+				console.log('received input event: ');
+				console.log(actionData);
+				recording.addAction(new InputAction(actionData.x, actionData.y, actionData.input));
+				$(document).trigger('performed-an-action');
+			}
 		});
 
 		// When an action initialized loading (link to another page),
