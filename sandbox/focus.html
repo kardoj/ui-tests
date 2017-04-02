@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Focus</title>
+	<script>
+		window.onload = function() {
+			var allowedTagNames = ['TEXTAREA', 'INPUT'];
+			document.addEventListener('keyup', function(e) {
+				var focusedEl = document.activeElement;
+				if (allowedTagNames.indexOf(focusedEl.tagName) >= 0) {
+					var bounding = focusedEl.getBoundingClientRect();
+					var centerX = parseInt((bounding.bottom - bounding.top) / 2);
+					var centerY = parseInt((bounding.right - bounding.left) / 2);
+					console.log(focusedEl.tagName + '\'s center x: ' + centerX + ', center y:' + centerY);
+				}
+			});
+		};
+	</script>
+</head>
+<body>
+	<textarea cols="30" rows="10"></textarea>
+	<input type="text">
+</body>
+</html>
