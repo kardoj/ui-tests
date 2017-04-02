@@ -48,7 +48,7 @@ _Buildide_ lingid tulevad siia hiljem.
 
 ## Teadaolevad piirangud
 * Aken on alati samade mõõtmetega, millega test oli salvestatud
-* Testid esitatakse reaalajas
+* ~~Testid esitatakse reaalajas~~
   - Arenduse käigus on selgunud, et Electroni ja tema `<webview>` _tagi_ kasutades on võimalik kuulata `did-start-loading` ja `did-stop-loading` _evente_,
     mis teeb võimalikuks testide esitamise nii kiiresti, kui see võrgu poolt võimaldatud on.
 * `alert()`'iga või `prompt()`'iga ei suuda tester midagi teha
