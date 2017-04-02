@@ -32,6 +32,9 @@ Salvestuse mahamängimine
 28.03 - 5
 
 Salvestuse mahamängimine
+* 30.03 - Salvestuse mahamängimine (klikk, urli kontroll, navigatsioon)
+* 31.03 - -,,- (esimene edukas salvestuse esitamine)
+* 02.04 - Salvestuse mahamängimine, debug
 
 04.04 - 6
 

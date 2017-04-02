@@ -1,16 +1,20 @@
-﻿# Veebilehe kasutajaliidese testimise rakenduse loomine
+﻿# Veebisaidi kasutajaliidese testimise rakenduse arendamine
 
 ## Kirjeldus/eesmärk
-Luua töölauarakendus kasutades HTML'i, CSS'i, JavaScript'i ja Electron'i. Avades rakenduse saab kasutaja sisestada veebiaadressi. Sisestatud
-aadressil asuv leht avatakse rakenduses. Seejärel on võimalik alustada uue stsenaariumi salvestamist.
-Kasutaja tehtud hiirevajutused salvestatakse ja neid on võimalik pärast samas järjekorras automaatselt taasesitada.
+Luua töölauarakendus kasutades Electroni (JavaScript, HTML, CSS). Esimese sammuna saab kasutaja sisestada veebiaadressi, millist tahab testida.
+Aadressil asuv sait avatakse rakenduses. Seejärel saab alustada uue stsenaariumi (testi) salvestamist. Kasutaja saab teha erinevaid tegevusi, mida veebilehel
+on võimalik teha. Kogu tegevuste jada salvestatakse. Kasutaja saab testile nime anda ja seda hiljem taasesitada. Rakendus annab esitamise käigus (ebaõnnestumise korral)
+või taasesituse lõppedes (õnnestunud läbimise korral) kasutajale stsenaariumi läbimise kohta tagasisidet.
+Niisugust tehnikat kasutades on ilma iga kord käsitsi proovimata võimalik kindel olla, et vajalikud kasutajaliidese elemendid on pärast täiendavate arenduste lisamist säilinud.
 
 ## Piirangud
 * Aken on alati samade mõõtmetega, millega test oli salvestatud
 * Testid esitatakse reaalajas
+  - Arenduse käigus on selgunud, et Electroni ja tema `<webview>` _tagi_ kasutades on võimalik kuulata `did-start-loading` ja `did-stop-loading` _evente_,
+    mis teeb võimalikuks testide esitamise nii kiiresti, kui see võrgu poolt võimaldatud on.
 
 ## Ülesanded
-0. Uurida kliki salvestamist, mahamängimist koordinaatidepõhiselt (JavaScript elementFromPoint(x, y).click();)
+0. Uurida kliki salvestamist, mahamängimist koordinaatidepõhiselt (JavaScript document.elementFromPoint(x, y).click();)
 1. Electron rakendus, kuhu saab veebilehe sisse laadida
 2. Leida mõned konkurendid ja nende pakutavat funktsionaalsust uurida ja võrrelda
   1. Uurida automaattestimise skoopi (mida kuidas saab ja on mõistlik UI poolel testida)
@@ -30,6 +34,7 @@ Graafik venitas README.md liiga pikaks ja ma panin ta eraldi faili: SCHEDULE.md.
 * Akna suurust saab valida
 * _Guest_ lehe klikid registreeritakse _Parent_ lehel (asukohad saab kätte)
 * Saab luua uue testi, selle salvestada ja kustutada
+* Salvestada saab hiirevajutusi. Testi saab taasesitada. Tagasiside on hetkel konsoolis. (`Fail` -> `Konsool`)
 
 ## Lingid
 [Blogi](http://kardo.xyz/b/veebilehestiku-testimine/)
@@ -46,3 +51,6 @@ _Build_'ide lingid tulevad siia hiljem.
 
 ## Võiks teha, aga pole prioriteetsed
 * "Navigeeri" vajutades enne lehe laadimist AJAX kontroll, kas selline leht on olemas
+
+## Teadaolevad piirangud
+* `alert()`'iga või `prompt()`'iga ei suuda tester midagi teha
