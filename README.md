@@ -7,12 +7,6 @@ on võimalik teha. Kogu tegevuste jada salvestatakse. Kasutaja saab testile nime
 või taasesituse lõppedes (õnnestunud läbimise korral) kasutajale stsenaariumi läbimise kohta tagasisidet.
 Niisugust tehnikat kasutades on ilma iga kord käsitsi proovimata võimalik kindel olla, et vajalikud kasutajaliidese elemendid on pärast täiendavate arenduste lisamist säilinud.
 
-## Piirangud
-* Aken on alati samade mõõtmetega, millega test oli salvestatud
-* Testid esitatakse reaalajas
-  - Arenduse käigus on selgunud, et Electroni ja tema `<webview>` _tagi_ kasutades on võimalik kuulata `did-start-loading` ja `did-stop-loading` _evente_,
-    mis teeb võimalikuks testide esitamise nii kiiresti, kui see võrgu poolt võimaldatud on.
-
 ## Ülesanded
 0. Uurida kliki salvestamist, mahamängimist koordinaatidepõhiselt (JavaScript document.elementFromPoint(x, y).click();)
 1. Electron rakendus, kuhu saab veebilehe sisse laadida
@@ -53,4 +47,8 @@ _Buildide_ lingid tulevad siia hiljem.
 * "Navigeeri" vajutades enne lehe laadimist AJAX kontroll, kas selline leht on olemas
 
 ## Teadaolevad piirangud
+* Aken on alati samade mõõtmetega, millega test oli salvestatud
+* Testid esitatakse reaalajas
+  - Arenduse käigus on selgunud, et Electroni ja tema `<webview>` _tagi_ kasutades on võimalik kuulata `did-start-loading` ja `did-stop-loading` _evente_,
+    mis teeb võimalikuks testide esitamise nii kiiresti, kui see võrgu poolt võimaldatud on.
 * `alert()`'iga või `prompt()`'iga ei suuda tester midagi teha
