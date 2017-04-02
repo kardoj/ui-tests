@@ -1,9 +1,16 @@
 Tegevused:
 - Hiirevajutus
 - Tähemärgi sisestamine
+  - Testsait saadab ükshaaval keyup-evente koos koodidega ja valitud elemendi koordinaatidega
+  - Kui recorder näeb, et tuleb keyup-event, jätab meelde, et selline tuli (paneb arraysse koodi)
+  - Lisab arraysse koode kuni tulevad keyup-eventid.
+  - Kui tuleb mõni teine event, võtab keycodes array ja ehitab sellest ühe InputActioni
+    - Viimase keyup-event'i küljest võtab x ja y
+    - Sisestatud stringi parseb koodidest kokku
+    - Mahamängimisel võetakse x ja y järgi document.elementFromPoint(x, y) ja pannakse el.val('sisestusstring') (jQuery ühtlustab .val() nii textarea kui input type text jaoks)
 - Testsaidi kerimine
   - Luuakse tegevus, mis kerib lehe soovitud kohta
-  - Testi salvestamisel kontrollitakse enne ClickActionit, kas window.scrollX või window.scrollY on nullist erinevad. Kui on, luuakse scrollAction praegusele kohale.
+  - Testi salvestamisel kontrollitakse enne ClickActionit, kas window.scrollX või window.scrollY on viimatisest scrollist erinevad. Kui on, luuakse scrollAction praegusele kohale.
 Pärast iga tegevust peab kontrollima, kas leht hakkas laadima. Kui hakkas, siis laadimise lõpetamisel tuleb genereerida tegevus sihtaadressi kontrolliga.
 
 Üks natuke teist tüüpi tegevus on navigeerimistegevus. Sellega liigutakse lihtsalt ühelt lehelt teisele. Navigeerimistegevusega paralleelselt käib alati sihtaadressi kontroll.
