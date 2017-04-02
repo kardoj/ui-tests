@@ -1,12 +1,17 @@
 // All the event listeners that are injected into the quest page
 const { ipcRenderer } = require('electron');
 
+// Need to memorize the last scroll location to be able to know if it is needed to scroll again before next action
+let lastScrolledX = 0, lastScrolledY = 0;
+
 window.onload = () => {
 	// Send click events and coordinates to the <webview> element
 	document.addEventListener('click', (e) => {
 		// Check scroll position before clicking and record relevant action if needed
-		if (window.scrollX !== 0 || window.scrollY !== 0) {
+		if (window.scrollX !== lastScrolledX || window.scrollY !== lastScrolledY) {
 			ipcRenderer.sendToHost('scroll-event', { x: window.scrollX, y: window.scrollY });
+			lastScrolledX = window.scrollX;
+			lastScrolledY = window.scrollY;
 		}
 
 		// Record click action
