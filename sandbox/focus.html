@@ -7,6 +7,8 @@
 		window.onload = function() {
 			var allowedTagNames = ['TEXTAREA', 'INPUT'];
 			document.addEventListener('keyup', function(e) {
+				console.log(e.which);
+				console.log(String.fromCharCode(e.which));
 				var focusedEl = document.activeElement;
 				if (allowedTagNames.indexOf(focusedEl.tagName) >= 0) {
 					var bounding = focusedEl.getBoundingClientRect();
@@ -15,11 +17,17 @@
 					console.log(focusedEl.tagName + '\'s center x: ' + centerX + ', center y:' + centerY);
 				}
 			});
+			
+			document.getElementsByTagName('textarea')[0].value = 'tere';
+			
+			document.getElementById('pwd').addEventListener('keyup', function(e) { console.log(e.target.value); });
+			
 		};
 	</script>
 </head>
 <body>
 	<textarea cols="30" rows="10"></textarea>
 	<input type="text">
+	<input type="password" id="pwd">
 </body>
 </html>
