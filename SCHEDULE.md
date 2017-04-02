@@ -34,7 +34,7 @@ Salvestuse mahamängimine
 Salvestuse mahamängimine
 * 30.03 - Salvestuse mahamängimine (klikk, urli kontroll, navigatsioon)
 * 31.03 - -,,- (esimene edukas salvestuse esitamine)
-* 02.04 - Salvestuse mahamängimine, debug
+* 02.04 - Salvestuse mahamängimine, debug, scroll event, input event
 
 04.04 - 6
 
