@@ -30,8 +30,9 @@ let Recorder = {};
 			recording = new Recording();
 
 			// The first action in a recording must be a navigation to the test start page
+			// Also add an UrlCheck action to be sure
 			recording.addAction(new NavAction(testSite.get(0).getURL()));
-			testSite.get(0).openDevTools();
+			recording.addAction(new UrlCheck(testSite.get(0).getURL()));
 		});
 
 		// Handle events from the test site
