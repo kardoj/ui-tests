@@ -7,7 +7,7 @@ let lastScrolledX = 0, lastScrolledY = 0;
 // Keyup event targets must be with these tag names on playback
 let allowedInputTagNames = ['TEXTAREA', 'INPUT'];
 
-// Used to keep track of the input element while user is typing
+// Used to keep track of the input element while the user is typing
 let inputElement = null;
 
 window.onload = () => {
@@ -21,13 +21,15 @@ window.onload = () => {
 		ipcRenderer.sendToHost('click-event', { x: e.clientX, y: e.clientY, tagName: el.tagName });
 	});
 
-	document.addEventListener('keyup', (e) => { inputElement = document.activeElement; });
+	document.addEventListener('keyup', (e) => {
+		inputElement = document.activeElement;
+	});
 
 	function handleInput() {
 		if (inputElement !== null) {
 			let bounds = inputElement.getBoundingClientRect();
-			let centerX = parseInt((bounds.bottom - bounds.top) / 2);
-			let centerY = parseInt((bounds.right - bounds.left) / 2);
+			let centerX = parseInt(bounds.width / 2 + bounds.left);
+			let centerY = parseInt(bounds.height / 2 + bounds.top);
 			ipcRenderer.sendToHost('input-event', { x: centerX, y: centerY, input: inputElement.value });
 
 			inputElement = null;
@@ -68,9 +70,9 @@ window.onload = () => {
 	});
 
 	ipcRenderer.on('input-playback', (e, actionData) => {
-		let el = document.getElementFromPoint(actionData.x, actionData.y);
+		let el = document.elementFromPoint(actionData.x, actionData.y);
 		let tagName = el.tagName;
-		// Only try to input text if the selected element is correct, for additional checking
+		// Only try to input text if the selected element is correct, as an additional check
 		if (allowedInputTagNames.indexOf(tagName) >= 0) {
 			el.value = actionData.input;
 			ipcRenderer.sendToHost('action-playback-success', { message: 'Performed input action on successfully: ' + tagName + '\'s value was set to ' + actionData.input });
@@ -81,7 +83,6 @@ window.onload = () => {
 
 	// Checks playback
 	ipcRenderer.on('url-check-playback', (e, actionData) => {
-		console.log('received url check signal');
 		let currentURL = window.location.href;
 		let expectedURL = actionData.url;
 		let info = ', expected: ' + expectedURL + ', actual: ' + currentURL;

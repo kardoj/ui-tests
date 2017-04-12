@@ -31,6 +31,7 @@ let Recorder = {};
 
 			// The first action in a recording must be a navigation to the test start page
 			recording.addAction(new NavAction(testSite.get(0).getURL()));
+			testSite.get(0).openDevTools();
 		});
 
 		// Handle events from the test site
