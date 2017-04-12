@@ -58,6 +58,7 @@ window.onload = () => {
 	}
 
 	// http://stackoverflow.com/questions/11661187/form-serialize-javascript-no-framework#answer-30153391
+	// TODO: Move to a custom module
 	function serialize(form) {
 		var field, s = [];
 		if (typeof form == 'object' && form.nodeName == "FORM") {

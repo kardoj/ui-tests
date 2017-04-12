@@ -38,6 +38,9 @@ Salvestuse mahamängimine
 
 04.04 - 6
 
+Senise kirjutamine
+* 12.04 - InputAction'i korrastamine, Enteriga vormi submit
+
 11.04 - 6, 7, 8, (viimistlemine)
 
 (18.04) - 8, Viimistlemine

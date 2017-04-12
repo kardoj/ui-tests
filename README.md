@@ -28,7 +28,7 @@ Graafik venitas README.md liiga pikaks ja ma panin ta eraldi faili: SCHEDULE.md.
 * Akna suurust saab valida
 * _Guest_ lehe klikid registreeritakse _Parent_ lehel (asukohad saab kätte)
 * Saab luua uue testi, selle salvestada ja kustutada
-* Salvestada saab hiirevajutusi. Testi saab taasesitada. Tagasiside on hetkel konsoolis. (`Fail` -> `Konsool`)
+* Salvestada saab hiirevajutusi, sisestada sisestusi, kerida. Testi saab taasesitada. Tagasiside on hetkel konsoolis. (`Fail` -> `Konsool`)
 
 ## Lingid
 [Blogi](http://kardo.xyz/b/veebilehestiku-testimine/)
@@ -53,5 +53,4 @@ _Buildide_ lingid tulevad siia hiljem.
     mis teeb võimalikuks testide esitamise nii kiiresti, kui see võrgu poolt võimaldatud on.
 * `alert()`'iga või `prompt()`'iga ei suuda tester midagi teha
 * Valikukast ei tööta
-* Sisestus ei tööta nuppu all hoides (saadetakse ainult keyup)
-* Enteriga _submittimise_ asemel peab kasutama hiirt
+* Sisestus ei tööta nuppu all hoides (saadetakse ainult keydown)
