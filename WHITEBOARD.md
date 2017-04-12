@@ -52,3 +52,11 @@ Kuidas taasesitusel olla kindle, et suheldakse sama elemendiga, millega testi aj
 - Salvestada elemendi XPath (asukoht dokumendipuus) ja taasesitusel seda kontrollida?
 
 - Teeks esialgu tagName'ga, sellest peaks koos urlide checkidega piisama
+
+Enteriga submit
+- Kui keyup on Enter (13)
+  - Vaata, kas on olemas aktiivne element mis on INPUT
+  - Kui on, otsi kas on olemas parents() form
+  - Kui on, serialiseeri see vorm ja loo saadud URLile NavAction
+
+Testile lisada resolutsioon ja iga kord enne testi käivitamist määrata see resolutsioon

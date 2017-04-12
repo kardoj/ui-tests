@@ -33,6 +33,7 @@ let Recorder = {};
 			// Also add an UrlCheck action to be sure
 			recording.addAction(new NavAction(testSite.get(0).getURL()));
 			recording.addAction(new UrlCheck(testSite.get(0).getURL()));
+			testSite.get(0).openDevTools();
 		});
 
 		// Handle events from the test site
@@ -43,17 +44,15 @@ let Recorder = {};
 			if (e.channel == 'scroll-event') {
 				recording.addAction(new ScrollAction(actionData.x, actionData.y));
 				$(document).trigger('performed-an-action');
-			}
-
-			if (e.channel == 'click-event') {
+			} else if (e.channel == 'click-event') {
 				recording.addAction(new ClickAction(actionData.x, actionData.y, actionData.tagName));
 				$(document).trigger('performed-an-action');
-			}
-
-			if (e.channel == 'input-event') {
-				console.log('received input event: ');
-				console.log(actionData);
+			} else if (e.channel == 'input-event') {
 				recording.addAction(new InputAction(actionData.x, actionData.y, actionData.input));
+				$(document).trigger('performed-an-action');
+			} else if (e.channel == 'nav-event') {
+				console.log('got nav event');
+				recording.addAction(new NavAction(actionData.url));
 				$(document).trigger('performed-an-action');
 			}
 		});

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Form serialization without jQuery</title>
+  <script
+    src="https://code.jquery.com/jquery-3.2.1.js"
+    integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+    crossorigin="anonymous">
+  </script>
+  <script>
+    function serializeParentForm(child) {
+      $('#serialized_form').text();
+      var parentForm = child.form;
+
+      if (parentForm !== null) {
+        var params = serialize(parentForm);
+        var url = parentForm.getAttribute('action');
+        if (url == '?') {
+          url = window.location.href + url + params;
+        } else {
+          url += '?' + params;
+        }
+        document.getElementById('serialized_form').innerHTML = url;
+      }
+    }
+
+    // http://stackoverflow.com/questions/11661187/form-serialize-javascript-no-framework#answer-30153391
+    function serialize(form) {
+        var field, s = [];
+        if (typeof form == 'object' && form.nodeName == "FORM") {
+            var len = form.elements.length;
+            for (i=0; i<len; i++) {
+                field = form.elements[i];
+                if (field.name && !field.disabled && field.type != 'file' && field.type != 'reset' && field.type != 'submit' && field.type != 'button') {
+                    if (field.type == 'select-multiple') {
+                        for (j=form.elements[i].options.length-1; j>=0; j--) {
+                            if(field.options[j].selected)
+                                s[s.length] = encodeURIComponent(field.name) + "=" + encodeURIComponent(field.options[j].value);
+                        }
+                    } else if ((field.type != 'checkbox' && field.type != 'radio') || field.checked) {
+                        s[s.length] = encodeURIComponent(field.name) + "=" + encodeURIComponent(field.value);
+                    }
+                }
+            }
+        }
+        return s.join('&').replace(/%20/g, '+');
+    }
+  </script>
+</head>
+<body>
+  <form action="?">
+    <label for="name">Name</label>
+    <input type="text" name="name" id="name">
+    <br>
+    <label for="age">Age</label>
+    <input type="text" name="age" id="age">
+    <br>
+    <label for="occupation">Occupation</label>
+    <input type="text" name="occupation" id="occupation">
+    <br>
+    <label for="experience">Experience</label>
+    <select name="experience" id="experience">
+      <option value="6">< 6 months</option>
+      <option value="12">7-12 months</option>
+      <option value="24">13-24 months</option>
+      <option value="25">> 24 months</option>
+    </select>
+    <br>
+    <button type="button" onclick="serializeParentForm(this);">Serialize</button>
+  </form>
+  <div id="serialized_form"></div>
+</body>
+</html>

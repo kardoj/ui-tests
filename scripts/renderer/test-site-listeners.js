@@ -21,9 +21,63 @@ window.onload = () => {
 		ipcRenderer.sendToHost('click-event', { x: e.clientX, y: e.clientY, tagName: el.tagName });
 	});
 
-	document.addEventListener('keyup', (e) => {
+	document.addEventListener('keydown', (e) => {
 		inputElement = document.activeElement;
+
+		// Handle form submission with Enter
+		if (e.which == 13 && inputElement.tagName == 'INPUT') {
+			// Cancel submission if form was present
+			e.preventDefault();
+
+			// Record submission as an action
+			handleFormSubmissionWithEnter();
+		}
 	});
+
+	function handleFormSubmissionWithEnter() {
+		let parentForm = inputElement.form;
+
+		if (parentForm !== null) {
+			let params = serialize(parentForm);
+			let url = parentForm.getAttribute('action');
+			if (url == '?') {
+				url = window.location.href + url + params;
+			} else {
+				url += '?' + params;
+			}
+
+			// Check for input action before submission
+			handleInput();
+
+			// Send new navigation
+			ipcRenderer.sendToHost('nav-event', { url: url });
+
+			// Submit the form
+			parentForm.submit();
+		}
+	}
+
+    // http://stackoverflow.com/questions/11661187/form-serialize-javascript-no-framework#answer-30153391
+    function serialize(form) {
+        var field, s = [];
+        if (typeof form == 'object' && form.nodeName == "FORM") {
+            var len = form.elements.length;
+            for (i=0; i<len; i++) {
+                field = form.elements[i];
+                if (field.name && !field.disabled && field.type != 'file' && field.type != 'reset' && field.type != 'submit' && field.type != 'button') {
+                    if (field.type == 'select-multiple') {
+                        for (j=form.elements[i].options.length-1; j>=0; j--) {
+                            if(field.options[j].selected)
+                                s[s.length] = encodeURIComponent(field.name) + "=" + encodeURIComponent(field.options[j].value);
+                        }
+                    } else if ((field.type != 'checkbox' && field.type != 'radio') || field.checked) {
+                        s[s.length] = encodeURIComponent(field.name) + "=" + encodeURIComponent(field.value);
+                    }
+                }
+            }
+        }
+        return s.join('&').replace(/%20/g, '+');
+    }
 
 	function handleInput() {
 		if (inputElement !== null) {
