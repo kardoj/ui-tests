@@ -1,4 +1,5 @@
 ﻿# Veebisaidi kasutajaliidese testimise rakenduse arendamine
+## Development of Website User Interface Testing Software
 
 ## Kirjeldus/eesmärk
 Luua töölauarakendus kasutades Electroni (JavaScript, HTML, CSS). Esimese sammuna saab kasutaja sisestada veebiaadressi, millist tahab testida.
@@ -39,9 +40,9 @@ Vajalik võib olla Electroni globaalselt installeerimine `npm install -g electro
 Kui repo on kloonitud, siis seal kaustas käivitada `npm install` ja rakenduse käivitamiseks samas kohas `electron .`.
 _Buildide_ lingid tulevad siia hiljem.
 
-## Mõtted
-* Mida teha nende linkidega, mis avanevad uues aknas?
-* Parema hiireklahvi vajutus (pigem vist veebis pole)?
+## Mured
+* Mõnel dokumendil ei tundu `<webview preload='...'>` miskipärast toimivat. Näiteks minu blogis http://kardo.xyz/b laetakse skript külge, aga
+  ühel suvalisel HTML eksperimendil samas domeenis http://kardo.xyz/katsetused/tabs.html paistab, et ei laeta.
 
 ## Võiks teha, aga pole prioriteetsed
 * "Navigeeri" vajutades enne lehe laadimist AJAX kontroll, kas selline leht on olemas
@@ -54,3 +55,4 @@ _Buildide_ lingid tulevad siia hiljem.
 * `alert()`'iga või `prompt()`'iga ei suuda tester midagi teha
 * Valikukast ei tööta
 * Sisestus ei tööta nuppu all hoides (saadetakse ainult keydown)
+* Uues aknas avanevad asjad ei ole testitavad
