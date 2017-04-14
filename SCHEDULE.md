@@ -40,6 +40,7 @@ Salvestuse mahamängimine
 
 Senise kirjutamine
 * 12.04 - InputAction'i korrastamine, Enteriga vormi submit
+* 14.04 - Kontrolli alged
 
 11.04 - 6, 7, 8, (viimistlemine)
 
