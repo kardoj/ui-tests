@@ -9,6 +9,7 @@ let ActionParser = {};
 
 	// Check types
 	ns.URL_CHECK = 11;
+	ns.EL_CHECK = 12;
 
 	ns.parse = function(actionJSON) {
 		switch(actionJSON.type) {
@@ -22,6 +23,8 @@ let ActionParser = {};
 				return new InputAction(actionJSON.x, actionJSON.y, actionJSON.input);
 			case ns.URL_CHECK:
 				return new UrlCheck(actionJSON.url);
+			case ns.EL_CHECK:
+				return new ElCheck(actionJSON.x, actionJSON.y, actionJSON.tagName, actionJSON.checks);
 		}
 	};
 })(ActionParser, $);
