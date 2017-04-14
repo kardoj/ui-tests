@@ -46,7 +46,7 @@ Testi taasesitamine:
       lõpetab taasesituse ja kuvab kokkuvõtte
       - isPlaying false
 
-Kuidas taasesitusel olla kindle, et suheldakse sama elemendiga, millega testi ajal?
+Kuidas taasesitusel olla kindel, et suheldakse sama elemendiga, millega testi ajal?
 - Salvestada clickActioni juurde element.tagName ja kontrollida taasesitusel, kas punktist saadud element on sama tagName'ga (DIV, BUTTON, BODY)?
 - Kas oleks mõttekas lisada ka atribuudid ja nende kontroll (võivad arenduse käigus muutuda)?
 - Salvestada elemendi XPath (asukoht dokumendipuus) ja taasesitusel seda kontrollida?
@@ -60,3 +60,9 @@ Enteriga submit
   - Kui on, serialiseeri see vorm ja loo saadud URLile NavAction
 
 Testile lisada resolutsioon ja iga kord enne testi käivitamist määrata see resolutsioon
+
+Elemendi kontroll
+- Vajutades "Lisa kontroll" läheb testleht teise režiimi, kus kliki peale klikki ei salvestata vaid märgitakse element ära ja pakutakse variante kontrolliks
+- Linnukestega saab valida, millist elemendi omadust kontrollitakse (sisaldab olemasolu ja atribuute)
+- Vajutades "Lisa" (avanenud menüü all pärast valikuid), salvestatakse elemendi kontrolli tegevus (enne seda vajadusel kerimise action). Katkestamiseks "Katkesta".
+- Tegevus salvestab aktiivse elemendi x ja y, märgendi ja kontrolli (atribuut == väärtus, olemasolul mingi kodeering näiteks exists == 'true', mis kontrollib lihtsalt kas valitud asukohal oli    õige märgend)
