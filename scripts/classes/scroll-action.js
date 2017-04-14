@@ -6,5 +6,5 @@ function ScrollAction(x, y) {
 	this.perform = function(webview) {
 		let actionData = { x: this.x, y: this.y };
 		webview.get(0).send('scroll-playback', actionData);
-	}
+	};
 }

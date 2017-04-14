@@ -12,5 +12,5 @@ function InputAction(x, y, input) {
 		};
 
 		webview.get(0).send('input-playback', actionData);
-	}
+	};
 }

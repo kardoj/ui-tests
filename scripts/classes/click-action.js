@@ -12,5 +12,5 @@ function ClickAction(x, y, tagName) {
 		};
 
 		webview.get(0).send('click-playback', actionData);
-	}
+	};
 }
