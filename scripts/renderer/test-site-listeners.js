@@ -10,15 +10,27 @@ let allowedInputTagNames = ['TEXTAREA', 'INPUT'];
 // Used to keep track of the input element while the user is typing
 let inputElement = null;
 
+let unfinishedClick = false;
+
 window.onload = () => {
+	console.log('listeners');
+
 	// Send click events and coordinates to the <webview> element
 	document.addEventListener('click', (e) => {
-		handleScrolling();
-		handleInput();
+		// If the click was a forward click from the recorder, let it through
+		if (unfinishedClick) {
+			unfinishedClick = false;
+		} else {
+			// Prevent click initially and decide in recorder whether to click or not
+			e.preventDefault();
 
-		// Record click action
-		let el = document.elementFromPoint(e.clientX, e.clientY);
-		ipcRenderer.sendToHost('click-event', { x: e.clientX, y: e.clientY, tagName: el.tagName });
+			handleScrolling();
+			handleInput();
+
+			let el = document.elementFromPoint(e.clientX, e.clientY);
+			ipcRenderer.sendToHost('click-event', { x: e.clientX, y: e.clientY, element: el });
+			unfinishedClick = true;
+		}
 	});
 
 	document.addEventListener('keydown', (e) => {
@@ -80,13 +92,17 @@ window.onload = () => {
 		return s.join('&').replace(/%20/g, '+');
 	}
 
+	function getElementCenter(element) {
+		let bounds = element.getBoundingClientRect();
+		let centerX = parseInt(bounds.width / 2 + bounds.left);
+		let centerY = parseInt(bounds.height / 2 + bounds.top);
+		return { x: centerX, y: centerY };
+	}
+
 	function handleInput() {
 		if (inputElement !== null) {
-			let bounds = inputElement.getBoundingClientRect();
-			let centerX = parseInt(bounds.width / 2 + bounds.left);
-			let centerY = parseInt(bounds.height / 2 + bounds.top);
-			ipcRenderer.sendToHost('input-event', { x: centerX, y: centerY, input: inputElement.value });
-
+			let center = getElementCenter(inputElement);
+			ipcRenderer.sendToHost('input-event', { x: center.x, y: center.y, input: inputElement.value });
 			inputElement = null;
 		}
 	}
@@ -98,6 +114,12 @@ window.onload = () => {
 			lastScrolledY = window.scrollY;
 		}
 	}
+
+	// Since click is prevented and sent to the recorder when recording,
+	// it must still be performed afterwards
+	ipcRenderer.on('click-forward', (e, coords) => {
+		document.elementFromPoint(coords.x, coords.y).click();
+	});
 
 	// Actions playback
 	ipcRenderer.on('click-playback', (e, actionData) => {
