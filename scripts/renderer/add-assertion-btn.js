@@ -5,4 +5,8 @@ $(document).ready(() => {
 		addAssertionBtn.trigger('add-assertion');
 		addAssertionBtn.attr('disabled', 'disabled');
 	});
+
+	$(document).on('assertion-cancelled', () => {
+		addAssertionBtn.removeAttr('disabled');
+	});
 });

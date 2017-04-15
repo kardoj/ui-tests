@@ -15,7 +15,7 @@ body, html {
     width: 100%;
 }
 
-.recording-name-dialogue, .confirmation-dialogue, .loading-dialogue {
+.recording-name-dialogue, .confirmation-dialogue, .loading-dialogue, .choose-attributes-dialogue {
     background-color: #FFFFFF;
     display: none;
     left: 0;
@@ -33,11 +33,11 @@ body, html {
     padding: 3px;
 }
 
-.recording-name-content, .confirmation-dialogue-content {
+.recording-name-content, .confirmation-dialogue-content, .choose-attributes-content {
     padding: 3px;
 }
 
-.confirmation-dialogue-buttons {
+.confirmation-dialogue-buttons, .choose-attributes-buttons {
     padding: 3px;
     text-align: center;
 }

@@ -29,7 +29,7 @@ let stateFilter = {
 	// Which events are allowed to go through in which state
 	allowedEvents: {
 		STATE_RECORD: ['click-event', 'input-event', 'nav-event', 'scroll-event'],
-		STATE_ADD_CHECK: ['click-event', 'scroll-event']
+		STATE_ADD_CHECK: ['click-event', 'scroll-event', 'choose-el-check']
 	},
 
 	// All the events should go through this
@@ -63,7 +63,9 @@ window.onload = () => {
 			body.style.pointerEvents = 'visible';
 			let el = document.elementFromPoint(e.clientX, e.clientY);
 			body.style.pointerEvents = 'none';
-			console.log(el);
+
+			// Sends a signal to the <webview> that dialogue needs to be opened (received by recorder)
+			stateFilter.emit('choose-el-check', { x: e.clientX, y: e.clientY, tagName: el.tagName, attributes: el.attributes });
 		} else {
 			handleScrolling();
 			handleInput();
