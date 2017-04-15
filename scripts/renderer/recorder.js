@@ -58,7 +58,7 @@ let Recorder = {};
 				recording.addAction(new NavAction(actionData.url));
 				$(document).trigger('performed-an-action');
 			} else if (e.channel == 'choose-el-check') {
-				$(document).trigger('choose-el-check-attributes', { x: 0, y: 0, content: actionData.attributes });
+				$(document).trigger('choose-el-check-attributes', { x: 0, y: 0, content: actionData.checkOptions });
 			}
 		});
 

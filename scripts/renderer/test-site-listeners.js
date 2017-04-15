@@ -58,14 +58,15 @@ window.onload = () => {
 
 	document.addEventListener('click', (e) => {
 		if (stateFilter.getState() == stateFilter.states.STATE_ADD_CHECK) {
-			// Temporary enable pointerEvents to get event target
+			// Temporary enable pointerEvents to get the event target
+			// When pointerEvents are set to none, event target is always <html>
 			let body = document.getElementsByTagName('body')[0];
 			body.style.pointerEvents = 'visible';
 			let el = document.elementFromPoint(e.clientX, e.clientY);
 			body.style.pointerEvents = 'none';
 
 			// Sends a signal to the <webview> that dialogue needs to be opened (received by recorder)
-			stateFilter.emit('choose-el-check', { x: e.clientX, y: e.clientY, tagName: el.tagName, attributes: el.attributes });
+			stateFilter.emit('choose-el-check', { x: e.clientX, y: e.clientY, tagName: el.tagName, checkOptions: buildCheckOptions(el) });
 		} else {
 			handleScrolling();
 			handleInput();
@@ -87,6 +88,31 @@ window.onload = () => {
 			handleFormSubmissionWithEnter();
 		}
 	});
+
+	function buildCheckOptions(el) {
+		let attributes = el.attributes;
+		let options = [];
+
+		// Existence check is the first option
+		options.push({ name: 'exists', value: null });
+
+		// Add content option
+		options.push({ name: 'contents', value: shorten(el.innerHTML) });
+
+		for (let i = 0; i < attributes.length; i++) {
+			options.push({
+				name: attributes[i].name,
+				value: shorten(attributes[i].value)
+			});
+		}
+
+		return options;
+	}
+
+	function shorten(str) {
+		if (str.length > 30) str = str.substring(0, 10) + ' ... ' + str.substring(str.length - 10);
+		return str;
+	}
 
 	function handleFormSubmissionWithEnter() {
 		let parentForm = inputElement.form;

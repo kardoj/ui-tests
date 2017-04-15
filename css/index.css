@@ -28,7 +28,7 @@ body, html {
     display: inline;
 }
 
-.recording-name-title, .confirmation-dialogue-title, .loading-dialogue-title {
+.recording-name-title, .confirmation-dialogue-title, .loading-dialogue-title, .choose-attributes-title {
     font-weight: bold;
     padding: 3px;
 }
@@ -51,4 +51,8 @@ body, html {
     top: 0;
     width: 100%;
     z-index: 50;
+}
+
+.attribute-list {
+    list-style-type: none;
 }
