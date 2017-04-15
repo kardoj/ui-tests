@@ -6,7 +6,7 @@ $(document).ready(() => {
 		addAssertionBtn.attr('disabled', 'disabled');
 	});
 
-	$(document).on('assertion-cancelled', () => {
+	$(document).on('assertion-cancelled el-check-attributes-chosen', () => {
 		addAssertionBtn.removeAttr('disabled');
 	});
 });

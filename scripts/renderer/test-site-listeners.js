@@ -10,54 +10,20 @@ let allowedInputTagNames = ['TEXTAREA', 'INPUT'];
 // Used to keep track of the input element while the user is typing
 let inputElement = null;
 
-// Keeps track of the test site state
-// NB! All event emissions should go trough this object to make sure that state check is applied in one place
-let stateFilter = {
-	// The tested site can be in one of two different states:
-	// STATE_RECORD - is sending out all the events that are not related to adding a check
-	// STATE_ADD_CHECK - is sending out only the events that are related to adding a check
-	// The reasoning behind two different states is that the recording can not be allowed
-	// to register the regular actions when adding a check (ClickAction for example, since it
-	// is used to select an element rather than register a click on it).
-	states: {
-		STATE_RECORD: 'STATE_RECORD',
-		STATE_ADD_CHECK: 'STATE_ADD_CHECK'
-	},
+const STATE_RECORD = 'STATE_RECORD';
+const STATE_ADD_CHECK=  'STATE_ADD_CHECK';
 
-	currentState: null,
-
-	// Which events are allowed to go through in which state
-	allowedEvents: {
-		STATE_RECORD: ['click-event', 'input-event', 'nav-event', 'scroll-event'],
-		STATE_ADD_CHECK: ['click-event', 'scroll-event', 'choose-el-check']
-	},
-
-	// All the events should go through this
-	emit: function(eventName, data) {
-		if (this.allowedEvents[this.currentState].indexOf(eventName) >= 0) {
-			ipcRenderer.sendToHost(eventName, data);
-		}
-	},
-
-	setState: function(state) {
-		if (this.states[state] !== undefined) {
-			this.currentState = state;
-		}
-	},
-
-	getState: function() { return this.currentState; }
-};
-
-// Always start with the record state
-// Resetting after every page load should not matter since adding a check should
-// not span over page changes
-stateFilter.setState(stateFilter.states.STATE_RECORD);
+// Resetting after every page load should not matter since adding a check shouldn't need to survive navigation
+let currentState = STATE_RECORD;
 
 window.onload = () => {
 	console.log('listeners');
 
 	document.addEventListener('click', (e) => {
-		if (stateFilter.getState() == stateFilter.states.STATE_ADD_CHECK) {
+		handleScrolling();
+		handleInput();
+
+		if (currentState == STATE_ADD_CHECK) {
 			// Temporary enable pointerEvents to get the event target
 			// When pointerEvents are set to none, event target is always <html>
 			let body = document.getElementsByTagName('body')[0];
@@ -66,13 +32,10 @@ window.onload = () => {
 			body.style.pointerEvents = 'none';
 
 			// Sends a signal to the <webview> that dialogue needs to be opened (received by recorder)
-			stateFilter.emit('choose-el-check', { x: e.clientX, y: e.clientY, tagName: el.tagName, checkOptions: buildCheckOptions(el) });
+			ipcRenderer.sendToHost('choose-el-check', { x: e.clientX, y: e.clientY, tagName: el.tagName, checkOptions: buildCheckOptions(el) });
 		} else {
-			handleScrolling();
-			handleInput();
-
 			let el = document.elementFromPoint(e.clientX, e.clientY);
-			stateFilter.emit('click-event', { x: e.clientX, y: e.clientY, tagName: el.tagName });
+			ipcRenderer.sendToHost('click-event', { x: e.clientX, y: e.clientY, tagName: el.tagName });
 		}
 	});
 
@@ -97,21 +60,16 @@ window.onload = () => {
 		options.push({ name: 'exists', value: null });
 
 		// Add content option
-		options.push({ name: 'contents', value: shorten(el.innerHTML) });
+		options.push({ name: 'contents', value: el.textContent });
 
 		for (let i = 0; i < attributes.length; i++) {
 			options.push({
 				name: attributes[i].name,
-				value: shorten(attributes[i].value)
+				value: attributes[i].value
 			});
 		}
 
 		return options;
-	}
-
-	function shorten(str) {
-		if (str.length > 30) str = str.substring(0, 10) + ' ... ' + str.substring(str.length - 10);
-		return str;
 	}
 
 	function handleFormSubmissionWithEnter() {
@@ -130,7 +88,7 @@ window.onload = () => {
 			handleInput();
 
 			// Send new navigation
-			stateFilter.emit('nav-event', { url: url });
+			ipcRenderer.sendToHost('nav-event', { url: url });
 
 			// Submit the form
 			parentForm.submit();
@@ -170,14 +128,14 @@ window.onload = () => {
 	function handleInput() {
 		if (inputElement !== null) {
 			let center = getElementCenter(inputElement);
-			stateFilter.emit('input-event', { x: center.x, y: center.y, input: inputElement.value });
+			ipcRenderer.sendToHost('input-event', { x: center.x, y: center.y, input: inputElement.value });
 			inputElement = null;
 		}
 	}
 
 	function handleScrolling() {
 		if (window.scrollX !== lastScrolledX || window.scrollY !== lastScrolledY) {
-			stateFilter.emit('scroll-event', { x: window.scrollX, y: window.scrollY });
+			ipcRenderer.sendToHost('scroll-event', { x: window.scrollX, y: window.scrollY });
 			lastScrolledX = window.scrollX;
 			lastScrolledY = window.scrollY;
 		}
@@ -185,13 +143,13 @@ window.onload = () => {
 
 	// A signal that the site needs to go to check adding state
 	ipcRenderer.on('add-check-state', () => {
-		stateFilter.setState(stateFilter.states.STATE_ADD_CHECK);
+		currentState = STATE_ADD_CHECK;
 		document.getElementsByTagName('body')[0].style.pointerEvents = 'none';
 	});
 
 	// A signal that the site needs to go to recording state
 	ipcRenderer.on('record-state', () => {
-		stateFilter.setState(stateFilter.states.STATE_RECORD);
+		currentState = STATE_RECORD;
 		document.getElementsByTagName('body')[0].style.pointerEvents = 'visible';
 	});
 
@@ -242,6 +200,50 @@ window.onload = () => {
 			ipcRenderer.sendToHost('action-playback-success', { message: 'Peformed url check successfully' + info });
 		} else {
 			ipcRenderer.sendToHost('action-playback-failure', { message: 'Performed a failed url check' + info });
+		}
+	});
+
+	ipcRenderer.on('el-check-playback', (e, actionData) => {
+		let el = document.elementFromPoint(actionData.x, actionData.y);
+		console.log('el-tagname: ' + el.tagName);
+		let failed = [];
+		let passed = [];
+
+		for (let i = 0; i < actionData.checks.length; i++) {
+			let check = actionData.checks[i];
+			// Handle special keywords first
+			if (check.name == 'exists') {
+				if (actionData.tagName == el.tagName) {
+					passed.push(check);
+				} else {
+					failed.push(check);
+				}
+			} else if (check.name == 'contents') {
+				if (el.textContent == check.value) {
+					passed.push(check);
+				} else {
+					failed.push(check);
+				}
+			} else {
+				// Handle attributes
+				if (el.getAttribute(check.name) == check.value) {
+					passed.push(check);
+				} else {
+					failed.push(check);
+				}
+			}
+		}
+
+		if (failed.length > 0) {
+			let failedProperties = failed.map(function(check) { return check.name; });
+			ipcRenderer.sendToHost('action-playback-failure', {
+				message: 'Performed a failed el check (' + actionData.tagName + ') on the following properties: ' + failedProperties.join(', ')
+			});
+		} else {
+			let passedProperties = passed.map(function(check) { return check.name; });
+			ipcRenderer.sendToHost('action-playback-success', {
+				message: 'Performed a successful el check (' + actionData.tagName + ') on the following properties: ' + passedProperties.join(', ')
+			});
 		}
 	});
 };

@@ -33,7 +33,6 @@ let Recorder = {};
 			// Also add an UrlCheck action to be sure
 			recording.addAction(new NavAction(testSite.get(0).getURL()));
 			recording.addAction(new UrlCheck(testSite.get(0).getURL()));
-			testSite.get(0).openDevTools();
 		});
 
 		addAssertionBtn.on('add-assertion', () => { testSite.get(0).send('add-check-state'); });
@@ -58,8 +57,14 @@ let Recorder = {};
 				recording.addAction(new NavAction(actionData.url));
 				$(document).trigger('performed-an-action');
 			} else if (e.channel == 'choose-el-check') {
-				$(document).trigger('choose-el-check-attributes', { x: 0, y: 0, content: actionData.checkOptions });
+				$(document).trigger('choose-el-check-attributes', { x: actionData.x, y: actionData.y, tagName: actionData.tagName, content: actionData.checkOptions });
 			}
+		});
+
+		// When the dialogue sends back a confirmation with checks, save the check action
+		$(document).on('el-check-attributes-chosen', (e, actionData) => {
+			recording.addAction(new ElCheck(actionData.x, actionData.y, actionData.tagName, actionData.checks));
+			$(document).trigger('performed-an-action');
 		});
 
 		// When an action initialized loading (link to another page),
