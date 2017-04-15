@@ -43,7 +43,9 @@ let stateFilter = {
 		if (this.states[state] !== undefined) {
 			this.currentState = state;
 		}
-	}
+	},
+
+	getState: function() { return this.currentState; }
 };
 
 // Always start with the record state
@@ -54,13 +56,21 @@ stateFilter.setState(stateFilter.states.STATE_RECORD);
 window.onload = () => {
 	console.log('listeners');
 
-	// Send click events and coordinates to the <webview> element
 	document.addEventListener('click', (e) => {
-		handleScrolling();
-		handleInput();
+		if (stateFilter.getState() == stateFilter.states.STATE_ADD_CHECK) {
+			// Temporary enable pointerEvents to get event target
+			let body = document.getElementsByTagName('body')[0];
+			body.style.pointerEvents = 'visible';
+			let el = document.elementFromPoint(e.clientX, e.clientY);
+			body.style.pointerEvents = 'none';
+			console.log(el);
+		} else {
+			handleScrolling();
+			handleInput();
 
-		let el = document.elementFromPoint(e.clientX, e.clientY);
-		stateFilter.emit('click-event', { x: e.clientX, y: e.clientY, tagName: el.tagName });
+			let el = document.elementFromPoint(e.clientX, e.clientY);
+			stateFilter.emit('click-event', { x: e.clientX, y: e.clientY, tagName: el.tagName });
+		}
 	});
 
 	document.addEventListener('keydown', (e) => {
@@ -148,11 +158,13 @@ window.onload = () => {
 	// A signal that the site needs to go to check adding state
 	ipcRenderer.on('add-check-state', () => {
 		stateFilter.setState(stateFilter.states.STATE_ADD_CHECK);
+		document.getElementsByTagName('body')[0].style.pointerEvents = 'none';
 	});
 
 	// A signal that the site needs to go to recording state
 	ipcRenderer.on('record-state', () => {
 		stateFilter.setState(stateFilter.states.STATE_RECORD);
+		document.getElementsByTagName('body')[0].style.pointerEvents = 'visible';
 	});
 
 	// Actions playback

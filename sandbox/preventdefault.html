@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>e.preventDefault()</title>
+  <script>
+    window.onload = function() {
+      document.getElementsByTagName('body')[0].style.pointerEvents = 'none';
+      document.addEventListener('click', function(e) {
+        console.log(e.target);
+      });
+    }
+  </script>
+</head>
+<body>
+  <a href="http://kardo.xyz/b">Blog</a>
+  <div onclick="window.location.href = 'http://kardo.xyz/b';">Blog</div>
+</body>
+</html>
