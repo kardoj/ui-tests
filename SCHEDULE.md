@@ -39,9 +39,11 @@ Salvestuse mahamängimine
 04.04 - 6
 
 Senise kirjutamine
-* 12.04 - InputAction'i korrastamine, Enteriga vormi submit
-* 14.04 - Kontrolli alged
 
 11.04 - 6, 7, 8, (viimistlemine)
+
+* 12.04 - InputAction'i korrastamine, Enteriga vormi submit
+* 14.04 - Kontrolli alged
+* 15.04 - Kontrollid valmis!
 
 (18.04) - 8, Viimistlemine

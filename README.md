@@ -30,6 +30,8 @@ Graafik venitas README.md liiga pikaks ja ma panin ta eraldi faili: SCHEDULE.md.
 * _Guest_ lehe klikid registreeritakse _Parent_ lehel (asukohad saab kätte)
 * Saab luua uue testi, selle salvestada ja kustutada
 * Salvestada saab hiirevajutusi, sisestada sisestusi, kerida. Testi saab taasesitada. Tagasiside on hetkel konsoolis. (`Fail` -> `Konsool`)
+* Vorme saab Enterit vajutades saata
+* Elemendi atribuutide kontroll
 
 ## Lingid
 [Blogi](http://kardo.xyz/b/veebilehestiku-testimine/)
