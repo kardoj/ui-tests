@@ -28,7 +28,6 @@ let Player = {};
 		$(document).on('recording-loaded', (e, data) => {
 			populateRecording(data.filedata);
 			startPlayback();
-			testSite.get(0).openDevTools();
 		});
 
 		$(document).on('finished-loading-after-action', () => {

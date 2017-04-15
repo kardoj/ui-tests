@@ -205,7 +205,6 @@ window.onload = () => {
 
 	ipcRenderer.on('el-check-playback', (e, actionData) => {
 		let el = document.elementFromPoint(actionData.x, actionData.y);
-		console.log('el-tagname: ' + el.tagName);
 		let failed = [];
 		let passed = [];
 
