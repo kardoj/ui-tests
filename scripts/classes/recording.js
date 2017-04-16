@@ -1,8 +1,11 @@
 /*
 * A recording of actions which can be played by Playback.
 */
-function Recording() {
+function Recording(windowWidth, windowHeight) {
 	this.name = null;
+	// The test is always run in these parent window dimensions
+	this.windowWidth = windowWidth;
+	this.windowHeight = windowHeight;
 	this.recordedActions = [];
 	this.hasActions = false;
 
@@ -25,6 +28,22 @@ function Recording() {
 		return this.recordedActions[n];
 	};
 
+	this.getWindowWidth = function() {
+		return this.windowWidth;
+	};
+
+	this.setWindowWidth = function(width) {
+		this.windowWidth = width;
+	};
+
+	this.setWindowHeight = function(height) {
+		this.windowHeight = height;
+	};
+
+	this.getWindowHeight = function() {
+		return this.windowHeight;
+	};
+
 	this.setName = function(name) {
 		this.name = name;
 	};
@@ -36,6 +55,8 @@ function Recording() {
 	this.toJSON = function() {
 		return JSON.stringify({
 			name: this.name,
+			windowWidth: this.windowWidth,
+			windowHeight: this.windowHeight,
 			actions: this.recordedActions
 		});
 	};

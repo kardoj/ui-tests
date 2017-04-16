@@ -48,6 +48,7 @@ _Buildide_ lingid tulevad siia hiljem.
 
 ## Võiks teha, aga pole prioriteetsed
 * "Navigeeri" vajutades enne lehe laadimist AJAX kontroll, kas selline leht on olemas
+* Testi taasesitamise tagasiside paremaks
 
 ## Teadaolevad piirangud
 * Aken on alati samade mõõtmetega, millega test oli salvestatud

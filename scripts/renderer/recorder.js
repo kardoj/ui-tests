@@ -27,7 +27,7 @@ let Recorder = {};
 			startTime = Utility.timestamp();
 
 			// When the recording starts, a new recording is created
-			recording = new Recording();
+			recording = new Recording(WindowSize.width, WindowSize.height);
 
 			// The first action in a recording must be a navigation to the test start page
 			// Also add an UrlCheck action to be sure

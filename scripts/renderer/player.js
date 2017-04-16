@@ -4,6 +4,7 @@ let Player = {};
 	let recording = null;
 	let performedActionCount = 0;
 	let waitingForTestsiteToPerform = false;
+	let waitingForWindowResize = false;
 
 	let contextMenu = null;
 	let playTestBtn = null;
@@ -26,6 +27,19 @@ let Player = {};
 
 		$(document).on('recording-loaded', (e, data) => {
 			populateRecording(data.filedata);
+			let recWidth = recording.getWindowWidth();
+			let recHeight = recording.getWindowHeight();
+			if (recWidth != WindowSize.width || recHeight != WindowSize.height) {
+				IPC.send('resize-window', [recWidth, recHeight]);
+				waitingForWindowResize = true;
+			} else {
+				startPlayback();
+			}
+		});
+
+		IPC.on('test-site-resize', () => {
+			if (!waitingForWindowResize) return;
+			waitingForWindowResize = false;
 			startPlayback();
 		});
 
@@ -69,6 +83,8 @@ let Player = {};
 			recording = new Recording();
 
 			recording.setName(jsonData.name);
+			recording.setWindowWidth(jsonData.windowWidth);
+			recording.setWindowHeight(jsonData.windowHeight);
 			for (let i = 0; i < jsonData.actions.length; i++) recording.addAction(ActionParser.parse(jsonData.actions[i]));
 		}
 
