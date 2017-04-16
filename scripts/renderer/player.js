@@ -21,7 +21,6 @@ let Player = {};
 		testSite = $('#test_site');
 
 		playTestBtn.on('start-playback', (e, filename) => {
-			//testSite.get(0).openDevTools();
 			$(document).trigger('load-recording', PATH.join(Config.testLocation, filename));
 		});
 
@@ -48,6 +47,11 @@ let Player = {};
 			}
 		});
 
+		$(document).on('cancel-playback', () => {
+			if (!isPlaying) return;
+			stopPlayback(true);
+		});
+
 		// Listen to testsite action feedback
 		$(testSite).get(0).addEventListener('ipc-message', (e) => {
 			if (!isPlaying) return;
@@ -69,6 +73,7 @@ let Player = {};
 		}
 
 		function startPlayback() {
+			$(document).trigger('playback-play-start', { totalActionCount: recording.getActionCount(), name: recording.getName() });
 			isPlaying = true;
 			performNextAction();
 		}
@@ -77,14 +82,18 @@ let Player = {};
 			console.log('performed action ' + performedActionCount);
 			let act = recording.getAction(performedActionCount);
 			act.perform(testSite);
+			performedActionCount++;
 			console.log(act);
+			$(document).trigger('playback-play-next-action', {
+				performedActionCount: performedActionCount,
+				actionHumanName: act.humanName
+			});
 			waitingForTestsiteToPerform = true;
 		}
 
 		// Moves on to the next action after testSite has completed the action
 		function advance(message) {
 			console.log('ACTION SUCCESS: ' + message);
-			performedActionCount++;
 			$(document).trigger('performed-an-action');
 		}
 
@@ -94,13 +103,14 @@ let Player = {};
 			stopPlayback();
 		}
 
-		function stopPlayback() {
+		function stopPlayback(cancelled = false) {
 			showTestResult();
+			contextMenu.find(':input').removeAttr('disabled');
+			// TODO: get some additional feedback on failure
+			$(document).trigger('playback-play-stop', { success: recording.getActionCount() == performedActionCount, cancelled: cancelled });
 			isPlaying = false;
 			performedActionCount = 0;
 			recording = null;
-			$(document).trigger('stop-playback');
-			contextMenu.find(':input').removeAttr('disabled');
 		}
 
 		function showTestResult() {

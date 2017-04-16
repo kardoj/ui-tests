@@ -29,6 +29,10 @@ function Recording() {
 		this.name = name;
 	};
 
+	this.getName = function() {
+		return this.name;
+	};
+
 	this.toJSON = function() {
 		return JSON.stringify({
 			name: this.name,

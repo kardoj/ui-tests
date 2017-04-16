@@ -33,6 +33,7 @@
   <script src="../scripts/renderer/confirmation-dialogue.js" charset="utf-8"></script>
   <script src="../scripts/renderer/test-site-loading.js" charset="utf-8"></script>
   <script src="../scripts/renderer/action-parser.js" charset="utf-8"></script>
+  <script src="../scripts/renderer/player-feedback-panel.js" charset="utf-8"></script>
 </head>
 <body>
   <!-- Menu -->
@@ -79,6 +80,22 @@
       <div class="confirmation-dialogue-buttons">
         <button type="button" id="confirm_btn">Jah</button>
         <button type="button" id="cancel_btn">Ei</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="player-feedback-panel" id="player_feedback_panel">
+    <div class="feedback-panel-title"><span id="test_name"></span></div>
+    <div class="feedback-panel-content">
+      <div class="step-count">
+        <span class="steps-big" id="steps_done"></span>
+        <span class="steps-big">/</span>
+        <span class="steps-big" id="steps_total"></span>
+      </div>
+      <div class="step-name" id="step_name"></div>
+      <div class="feedback-panel-buttons">
+        <button type="button" id="close_btn">Sulge</button>
+        <button type="button" id="cancel_btn">Katkesta</button>
       </div>
     </div>
   </div>

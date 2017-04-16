@@ -15,4 +15,8 @@ $(document).ready(() => {
 	startRecordingBtn.on('start-recording', () => {
 		stopRecordingBtn.removeAttr('disabled');
 	});
+
+	$(document).on('playback-play-stop', () => {
+		stopRecordingBtn.attr('disabled', 'disabled');
+	});
 });

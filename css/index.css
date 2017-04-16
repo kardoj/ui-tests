@@ -15,7 +15,11 @@ body, html {
     width: 100%;
 }
 
-.recording-name-dialogue, .confirmation-dialogue, .loading-dialogue, .choose-attributes-dialogue {
+.recording-name-dialogue,
+.confirmation-dialogue,
+.loading-dialogue,
+.choose-attributes-dialogue,
+.player-feedback-panel {
     background-color: #FFFFFF;
     display: none;
     left: 0;
@@ -24,20 +28,33 @@ body, html {
     z-index: 100;
 }
 
+.player-feedback-panel {
+    background-color: rgba(255, 255, 255, .9);
+}
+
 .test-file-menu {
     display: inline;
 }
 
-.recording-name-title, .confirmation-dialogue-title, .loading-dialogue-title, .choose-attributes-title {
+.recording-name-title,
+.confirmation-dialogue-title,
+.loading-dialogue-title,
+.choose-attributes-title,
+.feedback-panel-title {
     font-weight: bold;
     padding: 3px;
 }
 
-.recording-name-content, .confirmation-dialogue-content, .choose-attributes-content {
+.recording-name-content,
+.confirmation-dialogue-content,
+.choose-attributes-content,
+.feedback-panel-content {
     padding: 3px;
 }
 
-.confirmation-dialogue-buttons, .choose-attributes-buttons {
+.confirmation-dialogue-buttons,
+.choose-attributes-buttons,
+.feedback-panel-buttons {
     padding: 10px;
     text-align: center;
 }
@@ -61,4 +78,19 @@ body, html {
 
 .tag-container {
     color: lightseagreen;
+}
+
+.player-feedback-panel .step-count {
+    text-align: center;
+    width: 300px;
+}
+
+.player-feedback-panel .step-count .steps-big {
+    font-size: 3em;
+}
+
+.player-feedback-panel .step-name {
+    font-size: .8em;
+    padding: 5px;
+    text-align: center;
 }
