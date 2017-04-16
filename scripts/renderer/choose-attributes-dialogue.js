@@ -51,6 +51,12 @@ $(document).ready(() => {
 		testSite.get(0).send('record-state');
 	}
 
+	// Translations for the special attributes
+	let translations = {
+		exists: 'Olemasolu',
+		contents: 'Sisu'
+	};
+
 	function populateData(content) {
 		let html = ['<ul class="attribute-list">'];
 		for (let i = 0; i < content.length; i++) {
@@ -58,9 +64,20 @@ $(document).ready(() => {
 			let checked = item.name == 'exists' ? 'checked="checked"' : '';
 			html.push('<li>');
 			html.push('<input type="checkbox" chk-name="' + item.name + '" chk-value="' + item.value + '" id="' + i + '" ' + checked + '>');
-			html.push(Utility.shortenString(item.name));
-			html.push(': ');
-			html.push(Utility.shortenString(item.value));
+			let translation = translations[item.name];
+			if (translation !== undefined) {
+				if (item.name == 'exists') {
+					html.push(translation);
+				} else {
+					html.push(translation);
+					html.push(': ');
+					html.push(Utility.shortenString(item.value));
+				}
+			} else {
+				html.push(Utility.shortenString(item.name));
+				html.push(': ');
+				html.push(Utility.shortenString(item.value));
+			}
 			html.push('</li>');
 		}
 		html.push('</ul>');

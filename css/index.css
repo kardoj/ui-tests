@@ -38,7 +38,7 @@ body, html {
 }
 
 .confirmation-dialogue-buttons, .choose-attributes-buttons {
-    padding: 3px;
+    padding: 10px;
     text-align: center;
 }
 
@@ -55,6 +55,8 @@ body, html {
 
 .attribute-list {
     list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
 
 .tag-container {
