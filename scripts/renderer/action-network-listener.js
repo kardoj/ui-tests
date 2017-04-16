@@ -34,7 +34,7 @@ $(document).ready(() => {
 
 	// If the recording was waiting for the loading to finish and the loading finished,
 	// add a navigation check event
-	testSite.get(0).addEventListener('did-stop-loading', () => {
+	testSite.get(0).addEventListener('did-finish-load', () => {
 		if (!Recorder.isRecording() && !Player.isPlaying()) return;
 		if (!isLoadingAfterAction) return;
 
