@@ -3,6 +3,7 @@ function InputAction(x, y, input) {
 	this.y = y;
 	this.input = input;
 	this.type = ActionParser.INPUT_ACTION;
+	this.humanName = 'Teksti sisestamine';
 
 	this.perform = function(webview) {
 		let actionData = {

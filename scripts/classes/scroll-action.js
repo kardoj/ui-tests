@@ -2,6 +2,7 @@ function ScrollAction(x, y) {
 	this.x = x;
 	this.y = y;
 	this.type = ActionParser.SCROLL_ACTION;
+	this.humanName = 'Kerimine';
 
 	this.perform = function(webview) {
 		let actionData = { x: this.x, y: this.y };

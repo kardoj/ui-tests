@@ -1,6 +1,7 @@
 function NavAction(url) {
 	this.url = url;
 	this.type = ActionParser.NAV_ACTION;
+	this.humanName = 'Navigatsioon';
 
 	this.perform = function(webview) {
 		let actionData = { url: this.url };

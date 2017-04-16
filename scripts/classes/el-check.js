@@ -8,6 +8,7 @@ function ElCheck(x, y, tagName, checks) {
 	this.tagName = tagName;
 	this.checks = checks;
 	this.type = ActionParser.EL_CHECK;
+	this.humanName = 'Atribuu(di/tide) kontroll';
 
 	this.perform = function(webview) {
 		let actionData = {

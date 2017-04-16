@@ -3,6 +3,7 @@ function ClickAction(x, y, tagName) {
 	this.y = y;
 	this.tagName = tagName;
 	this.type = ActionParser.CLICK_ACTION;
+	this.humanName = 'Hiirevajutus';
 
 	this.perform = function(webview) {
 		let actionData = {
