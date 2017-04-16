@@ -25,6 +25,7 @@ $(document).ready(() => {
 		stepsDone.text(0);
 		stepsTotal.text(data.totalActionCount);
 		stepName.text(' ');
+		UiHelper.centerElement(feedbackPanel);
 		feedbackPanel.show();
 	});
 
