@@ -1,14 +1,28 @@
 {
   "name": "ui-testing",
+  "author": "Kardo Jõeleht",
+  "description": "Website user interface testing application",
   "version": "1.0.0",
   "repository": "https://github.com/kardoj/ui-tests",
   "license": "MIT",
   "main": "scripts/main/main.js",
   "devDependencies": {
     "electron": "^1.6.2",
+    "electron-builder": "^17.0.1",
     "jshint": "^2.9.4"
   },
   "dependencies": {
     "jquery": "^3.1.1"
-  }
+  },
+  "build": {
+    "appId": "ui-testing",
+    "mac": {
+      "category": "Utilities"
+    }
+  },
+  "scripts": {
+    "pack": "build --dir",
+    "dist": "build"
+  },
+  "postinstall": "install-app-deps"
 }
