@@ -38,12 +38,12 @@ Graafik venitas README.md liiga pikaks ja ma panin ta eraldi faili: SCHEDULE.md.
 
 ## Lingid
 [Blogi](http://kardo.xyz/b/veebilehestiku-testimine/)
+Windowsi _build_: http://kardo.xyz/ui-testing.zip (~ 32 MB).
 
 ## Käivitamine (Windows)
 Eelduseks on [Node.js](https://nodejs.org/en/) olemasolu.
 Vajalik võib olla Electroni globaalselt installeerimine `npm install -g electron`.
 Kui repo on kloonitud, siis seal kaustas käivitada `npm install` ja rakenduse käivitamiseks samas kohas `electron .`.
-_Buildide_ lingid tulevad siia hiljem.
 
 ## Mured
 * Mõnel dokumendil ei tundu `<webview preload='...'>` miskipärast toimivat. Näiteks minu blogis http://kardo.xyz/b laetakse skript külge, aga
@@ -63,3 +63,4 @@ _Buildide_ lingid tulevad siia hiljem.
 * Sisestus ei tööta nuppu all hoides (saadetakse ainult keydown)
 * Uues aknas avanevad asjad ei ole testitavad
 * Tabulaatoriga vormil liikumine ja andmete sisestamine ei tööta
+* JavaScriptiga loodud menüüd, kus kontrollitakse nende aktiivsena hoidmiseks seda kas hiir nende kohal on, ei tööta
