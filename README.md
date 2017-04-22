@@ -48,6 +48,8 @@ Vajalik võib olla Electroni globaalselt installeerimine `npm install -g electro
 
 Kui repo on kloonitud, siis seal kaustas käivitada `npm install` ja rakenduse käivitamiseks samas kohas `electron .`.
 
+Ise _build_'i loomiseks saab käivitada `npm run dist`, mis peaks looma Linux, Mac või Windowsi rakenduse faili olenevalt kasutatavast operatsioonisüsteemist.
+
 ## Mured
 * Mõnel dokumendil ei tundu `<webview preload='...'>` miskipärast toimivat. Näiteks minu blogis http://kardo.xyz/b laetakse skript külge, aga
   ühel suvalisel HTML eksperimendil samas domeenis http://kardo.xyz/katsetused/tabs.html paistab, et ei laeta.
