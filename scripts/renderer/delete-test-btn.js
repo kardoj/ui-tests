@@ -27,10 +27,10 @@ $(document).ready(() => {
 		if (data.confirmed === false) return;
 
 		// If here, green light to delete the chosen test
-		let filepath = PATH.join(Config.testLocation, selectedFilename);
-		FS.unlink(filepath, (err) => {
-			if (err) throw err;
-			$(document).trigger('recording-deleted');
-		});
+		IPC.send('delete-recording-file', selectedFilename);
+	});
+
+	IPC.on('recording-file-deleted', () => {
+		$(document).trigger('recording-deleted');
 	});
 });

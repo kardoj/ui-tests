@@ -22,7 +22,7 @@ let Player = {};
 		testSite = $('#test_site');
 
 		playTestBtn.on('start-playback', (e, filename) => {
-			$(document).trigger('load-recording', PATH.join(Config.testLocation, filename));
+			$(document).trigger('load-recording', filename);
 		});
 
 		$(document).on('recording-loaded', (e, data) => {

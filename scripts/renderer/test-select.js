@@ -1,34 +1,42 @@
 $(document).ready(() => {
 	let testSelect = $('#test_select');
+	let waitingForFiles = false; // Safety
+	let selected = null;
 
 	readTestDirectory();
 	// When 'Esita' is clicked, load the selected file into a Recording
 	// Create a playback and play the recording
 
 	$(document).on('recording-saved recording-deleted', (e, recordingName) => {
-		readTestDirectory(recordingName);
+		if (recordingName !== undefined) selected = recordingName;
+		readTestDirectory();
 	});
 
-	function readTestDirectory(selected) {
-		FS.readdir(Config.testLocation, (err, files) => {
-			if (err) throw err;
+	function readTestDirectory() {
+		if (waitingForFiles) return;
 
-			populateSelect(files, selected);
-		});
+		IPC.send('get-test-file-list');
+		waitingForFiles = true;
 	}
 
-	function populateSelect(files, selected = null) {
+	IPC.on('got-test-file-list', (e, files) => {
+		populateSelect(files, selected);
+		waitingForFiles = false;
+	});
+
+	function populateSelect(files) {
 		testSelect.val('');
 		testSelect.empty();
 
 		for (let i = 0; i < files.length; i++) {
-			let value = files[i];
-			let text  = PATH.basename(files[i], Config.testFileExtension);
-			let option = `<option value='${value}'>${text}</option>`;
+			let option = `<option value='${files[i]}'>${files[i]}</option>`;
 			testSelect.append(option);
 		}
 
-		// If selected is provided, select it
-		if (selected !== null) testSelect.val(selected);
+		// If selected is provided, select it and null it again
+		if (selected !== null) {
+			testSelect.val(selected);
+			selected = null;
+		}
 	}
 });

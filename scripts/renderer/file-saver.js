@@ -1,11 +1,14 @@
 $(document).ready(() => {
-	$(document).on('save-recording', (e, recordingInfo) => {
-		let filenameWithExtension = recordingInfo.name + Config.testFileExtension;
-		let location = PATH.join(Config.testLocation, filenameWithExtension);
-		FS.writeFile(location, recordingInfo.data, (err) => {
-			if (err) throw err;
+	let waitingForSave = false; // Extra safety
 
-			$(document).trigger('recording-saved', filenameWithExtension);
-		});
+	$(document).on('save-recording', (e, recordingInfo) => {
+		IPC.send('save-recording-file', [recordingInfo.name, recordingInfo.data]);
+		waitingForSave = true;
+	});
+
+	IPC.on('recording-file-saved', (e, filename) => {
+		if (!waitingForSave) return;
+		$(document).trigger('recording-saved', filename);
+		waitingForSave = false;
 	});
 });

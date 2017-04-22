@@ -1,8 +1,15 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const url = require('url');
-
+const fs = require('fs');
 require(path.join(__dirname, 'menu'));
+
+const testFolder = 'ui-tests-tests';
+const testFileExtension = '.uitest';
+// If test folder is not created yet, create it
+const testPath = path.join(app.getPath('appData'), testFolder);
+if (!fs.existsSync(testPath)) fs.mkdirSync(testPath);
+
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -33,6 +40,40 @@ function createWindow () {
 		mainWindow = null;
 	});
 }
+
+ipcMain.on('delete-recording-file', (e, filename) => {
+	let fileWithExtension = filename + testFileExtension;
+	fs.unlink(path.join(testPath, fileWithExtension), (err) => {
+		if (err) throw err;
+		e.sender.send('recording-file-deleted');
+	});
+});
+
+ipcMain.on('get-test-file-list', (e) => {
+	fs.readdir(testPath, (err, files) => {
+		if (err) throw err;
+		let filesWithoutExtension = files.map((f) => {
+			return path.basename(f, testFileExtension);
+		});
+		e.sender.send('got-test-file-list', filesWithoutExtension);
+	});
+});
+
+ipcMain.on('save-recording-file', (e, recordingData) => {
+	let fileWithExtension = recordingData[0] + testFileExtension;
+	fs.writeFile(path.join(testPath, fileWithExtension), recordingData[1], (err) => {
+		if (err) throw err;
+		e.sender.send('recording-file-saved', recordingData[0]);
+	});
+});
+
+ipcMain.on('load-recording-file', (e, filename) => {
+	let fileWithExtension = filename + testFileExtension;
+	fs.readFile(path.join(testPath, fileWithExtension), (err, data) => {
+		if (err) throw err;
+		e.sender.send('recording-file-loaded', data);
+	});
+});
 
 ipcMain.on('resize-window', (e, dimensions) => {
 	app.setWindowSize(dimensions[0], dimensions[1]);
