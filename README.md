@@ -34,6 +34,7 @@ Graafik venitas README.md liiga pikaks ja ma panin ta eraldi faili: SCHEDULE.md.
 * Elemendi atribuutide kontroll
 * Salvestuse taasesitusel kuvatakse paneel, mis näitab mitu tegevust on edukalt läbitud.
 * Test esitatakse alati samade mõõtmetega aknas, millega see salvestati.
+* Testfailid salvestatakse Windowsi keskkonnas `AppData/Roaming/ui-tests-tests` kausta. Teistes süsteemides peaks rakenduste andmete kausta samuti tekkima `ui-tests-tests` kaust.
 
 ## Lingid
 [Blogi](http://kardo.xyz/b/veebilehestiku-testimine/)
