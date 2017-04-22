@@ -61,3 +61,4 @@ _Buildide_ lingid tulevad siia hiljem.
 * Valikukast ei tööta
 * Sisestus ei tööta nuppu all hoides (saadetakse ainult keydown)
 * Uues aknas avanevad asjad ei ole testitavad
+* Tabulaatoriga vormil liikumine ja andmete sisestamine ei tööta
